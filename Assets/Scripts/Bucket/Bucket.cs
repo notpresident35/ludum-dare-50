@@ -75,7 +75,7 @@ namespace GameJam
 				contents.Add(fallObj.ingredient);
 				stateChanged.Invoke();
 
-				Destroy(fallObj.gameObject);
+				fallObj.Collect();
 			}
 		}
 	}
