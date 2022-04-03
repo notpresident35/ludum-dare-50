@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace GameJam
@@ -10,14 +11,17 @@ namespace GameJam
 		// Variables
 		// =========================================================
 
+		private const float BufferDuration = 0.1f;
+
 		public PlayerAvatarConfig config;
-
-		[SerializeField] private PlayerAvatarState _state;
-		public ManualTimer inputThrowBuffer = new ManualTimer(0.1f);
-
 		public bool debugLog;
 
+		public ManualTimer inputUseBuffer = new ManualTimer(BufferDuration);
+		public ManualTimer inputAssembleBuffer = new ManualTimer(BufferDuration);
+
+		[SerializeField] private PlayerAvatarState _state;
 		public Vector2 curVel;
+		public GameObject heldObject;
 
 		private Rigidbody2D body;
 		private SpriteRenderer spriteRen;
@@ -33,7 +37,7 @@ namespace GameJam
 			{
 				if (debugLog)
 				{
-					Debug.Log($"[PlayerAvatar] {_state} => {value}");
+					Debug.Log($"[PlayerAvatar] {_state} -> {value}");
 				}
 				_state = value;
 			}
@@ -54,7 +58,7 @@ namespace GameJam
 			_state = PlayerAvatarState.Throw;
 			State = PlayerAvatarState.Walk;
 			curVel = Vector2.zero;
-			inputThrowBuffer.Stop();
+			inputUseBuffer.Stop();
 		}
 
 		// =========================================================
@@ -63,11 +67,12 @@ namespace GameJam
 
 		private void Update()
 		{
-			inputThrowBuffer.Update(Time.deltaTime);
+			inputUseBuffer.Update(Time.deltaTime);
+			inputAssembleBuffer.Update(Time.deltaTime);
 
 			if (Input.GetButtonDown("Fire1"))
 			{
-				inputThrowBuffer.Start();
+				inputUseBuffer.Start();
 			}
 		}
 
@@ -106,9 +111,9 @@ namespace GameJam
 				spriteRen.flipX = horz < 0;
 			}
 
-			if (inputThrowBuffer.Running)
+			if (inputUseBuffer.Running)
 			{
-				inputThrowBuffer.Stop();
+				inputUseBuffer.Stop();
 				State = PlayerAvatarState.Throw;
 			}
 		}
