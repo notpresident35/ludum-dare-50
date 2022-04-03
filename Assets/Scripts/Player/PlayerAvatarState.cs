@@ -6,6 +6,6 @@ namespace GameJam
 {
 	public enum PlayerAvatarState
 	{
-		Walk, Throw
+		Walk, Hold
 	}
 }

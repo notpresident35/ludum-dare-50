@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkHorzMax: 5
   walkHorzAccel: 60
+  sameYTolerance: 0.05
+  assembleEffects: {fileID: 6433909525868581247, guid: f047be739eb573b4bb1497fe9fa744b4, type: 3}
