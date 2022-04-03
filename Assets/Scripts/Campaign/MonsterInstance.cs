@@ -40,7 +40,6 @@ namespace GameJam
 		public override void Die()
 		{
 			base.Die();
-			track.DetachMonster(this);
 			Destroy(gameObject);
 		}
 	}

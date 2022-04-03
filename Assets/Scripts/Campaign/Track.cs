@@ -21,20 +21,10 @@ namespace GameJam
 			hero.track = this;
 		}
 
-		public void DetachHero()
-		{
-			CurrentHero = null;
-		}
-
 		public void AttachMonster(MonsterInstance monster)
 		{
 			CurrentMonsters.Add(monster);
 			monster.track = this;
-		}
-
-		public void DetachMonster(MonsterInstance monster)
-		{
-			CurrentMonsters.Remove(monster);
 		}
 
 		void Update()
@@ -51,11 +41,31 @@ namespace GameJam
 
 			foreach (MonsterInstance monster in CurrentMonsters)
 			{
+				if (monster == null)
+				{
+					return;
+				}
+
 				if (!monster.Attack())
 				{
+
 					monster.Move();
 				}
 			}
+
+			CleanMonsterList();
+		}
+
+		void CleanMonsterList()
+		{
+			for (int i = CurrentMonsters.Count; i < 0; i--)
+			{
+				if (CurrentMonsters[i] == null)
+				{
+					CurrentMonsters.RemoveAt(i);
+				}
+			}
+
 		}
 	}
 }

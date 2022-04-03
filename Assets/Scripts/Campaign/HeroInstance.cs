@@ -38,9 +38,7 @@ namespace GameJam
 
 		public override void Die()
 		{
-			base.Die();
-			track.DetachHero();
-			Destroy(gameObject);
+			// TODO: Assign new hero data and RESPAWN :)
 		}
 	}
 }
