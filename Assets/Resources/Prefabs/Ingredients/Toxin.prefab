@@ -12,9 +12,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 49f24831dd37f624ebda02702a40a5cc, type: 2}
     - target: {fileID: 8865805816478105819, guid: b194d454fd5bf9042ad3340e884c80b1, type: 3}
+      propertyPath: m_Size.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8865805816478105819, guid: b194d454fd5bf9042ad3340e884c80b1, type: 3}
+      propertyPath: m_Size.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8865805816478105819, guid: b194d454fd5bf9042ad3340e884c80b1, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 9082349458125976317, guid: 53d7ae54bbc393441ad330391f8cb2a7, type: 3}
+      objectReference: {fileID: 9082349458125976317, guid: a602c4f65e27d3d4aa6d877f44550c2d, type: 3}
     - target: {fileID: 8865805816491888430, guid: b194d454fd5bf9042ad3340e884c80b1, type: 3}
       propertyPath: m_Name
       value: Toxin
