@@ -12,7 +12,9 @@ public class AlchemyManager : MonoBehaviour
     public List<Monster> AllMonsters;
 
     private void Awake() {
+        AllIngredients = new List<Ingredient>();
         AllIngredients.AddRange(Resources.LoadAll("ScriptableObjects/Ingredients").Cast<Ingredient>());
+        AllMonsters = new List<Monster>();
         AllMonsters.AddRange(Resources.LoadAll("ScriptableObjects/Monsters").Cast<Monster>());
     }
 
