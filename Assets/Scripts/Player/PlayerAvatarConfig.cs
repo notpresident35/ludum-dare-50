@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameJam
 {
-	[CreateAssetMenu(menuName ="MyGame/Player Avatar Config")]
+	[CreateAssetMenu(menuName = "MyGame/Player Avatar Config")]
 	public class PlayerAvatarConfig : ScriptableObject
 	{
 		[Header("Walk")]

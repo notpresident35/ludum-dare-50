@@ -21,7 +21,7 @@ namespace GameJam
 
 				// CHANGE THIS NUMBER ACCORDING TO PROJECT
 				importer.spritePixelsPerUnit = 32;
-				
+
 				importer.textureCompression = TextureImporterCompression.Uncompressed;
 				importer.filterMode = FilterMode.Point;
 				importer.wrapMode = TextureWrapMode.Repeat;

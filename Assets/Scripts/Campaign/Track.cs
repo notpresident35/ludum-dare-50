@@ -2,48 +2,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Track : MonoBehaviour
+namespace GameJam
 {
-    
-    [HideInInspector]
-    public HeroInstance CurrentHero;
-    [HideInInspector]
-    public List<MonsterInstance> CurrentMonsters;
+	public class Track : MonoBehaviour
+	{
 
-    public Transform MonsterSpawnpoint;
-    public Transform HeroSpawnpoint;
+		[HideInInspector]
+		public HeroInstance CurrentHero;
+		[HideInInspector]
+		public List<MonsterInstance> CurrentMonsters;
 
-    public void AttachHero (HeroInstance hero) {
-        CurrentHero = hero;
-        hero.track = this;
-    }
+		public Transform MonsterSpawnpoint;
+		public Transform HeroSpawnpoint;
 
-    public void DetachHero () {
-        CurrentHero = null;
-    }
+		public void AttachHero(HeroInstance hero)
+		{
+			CurrentHero = hero;
+			hero.track = this;
+		}
 
-    public void AttachMonster (MonsterInstance monster) {
-        CurrentMonsters.Add(monster);
-        monster.track = this;
-    }
+		public void DetachHero()
+		{
+			CurrentHero = null;
+		}
 
-    public void DetachMonster (MonsterInstance monster) {
-        CurrentMonsters.Remove(monster);
-    }
+		public void AttachMonster(MonsterInstance monster)
+		{
+			CurrentMonsters.Add(monster);
+			monster.track = this;
+		}
 
-    void Update(){
-        if (!CurrentHero) {
-            return;
-        }
+		public void DetachMonster(MonsterInstance monster)
+		{
+			CurrentMonsters.Remove(monster);
+		}
 
-        if (!CurrentHero.Attack()) {
-            CurrentHero.Move();
-        }
+		void Update()
+		{
+			if (!CurrentHero)
+			{
+				return;
+			}
 
-        foreach (MonsterInstance monster in CurrentMonsters) {
-            if (!monster.Attack()) {
-                monster.Move();
-            }
-        }
-    }
+			if (!CurrentHero.Attack())
+			{
+				CurrentHero.Move();
+			}
+
+			foreach (MonsterInstance monster in CurrentMonsters)
+			{
+				if (!monster.Attack())
+				{
+					monster.Move();
+				}
+			}
+		}
+	}
 }

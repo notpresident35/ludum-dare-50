@@ -2,24 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : MonoBehaviour
+namespace GameJam
 {
-    
-    public float health;
-    
-    public void Damage (float amount) {
-        print (gameObject.name + " was attacked");
-        health -= amount;
-        if (health <= 0) {
-            Die ();
-        }
-    }
+	public class Health : MonoBehaviour
+	{
 
-    public void Heal (float amount) {
-        health += amount;
-    }
+		public float health;
 
-    public virtual void Die() {
+		public void Damage(float amount)
+		{
+			print(gameObject.name + " was attacked");
+			health -= amount;
+			if (health <= 0)
+			{
+				Die();
+			}
+		}
 
-    }
+		public void Heal(float amount)
+		{
+			health += amount;
+		}
+
+		public virtual void Die()
+		{
+
+		}
+	}
 }

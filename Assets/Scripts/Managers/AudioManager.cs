@@ -3,30 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class AudioManager : MonoBehaviour
+namespace GameJam
 {
-    
-    public AudioMixer Mixer;
+	public class AudioManager : MonoBehaviour
+	{
 
-    float musicIntensity = 0;
-    float slowingEffect;
-    List<AudioSource> musicSources;
+		public AudioMixer Mixer;
 
-    private void Awake() {
-        musicSources = new List<AudioSource>();
-        foreach (Transform child in transform) {
-            musicSources.Add (child.GetComponent<AudioSource>());
-        }
-    }
+		float musicIntensity = 0;
+		float slowingEffect;
+		List<AudioSource> musicSources;
+
+		private void Awake()
+		{
+			musicSources = new List<AudioSource>();
+			foreach (Transform child in transform)
+			{
+				musicSources.Add(child.GetComponent<AudioSource>());
+			}
+		}
 
 
-    public void SetMusicIntensity(float intensity) {
-        musicIntensity = intensity;
-        // TODO: Implement!!
-    }
+		public void SetMusicIntensity(float intensity)
+		{
+			musicIntensity = intensity;
+			// TODO: Implement!!
+		}
 
-    public void SlowEffect () {
-        // Note: Implement later!
-        // Also don't slow down time.timescale directly here - tell gamemanager to do it, so other juice effects don't conflict
-    }
+		public void SlowEffect()
+		{
+			// Note: Implement later!
+			// Also don't slow down time.timescale directly here - tell gamemanager to do it, so other juice effects don't conflict
+		}
+	}
 }
