@@ -36,11 +36,5 @@ namespace GameJam
 			}
 			return false;
 		}
-
-		public override void Die()
-		{
-			base.Die();
-			Destroy(gameObject);
-		}
 	}
 }
