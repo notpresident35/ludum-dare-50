@@ -21,7 +21,10 @@ namespace GameJam
 
 		[SerializeField] private PlayerAvatarState _state;
 		public Vector2 curVel;
-		public GameObject heldObject;
+		public Bucket heldBucket;
+
+		public CircleCollider2D interactArea;
+		public LayerMask interactMask;
 
 		private Rigidbody2D body;
 		private SpriteRenderer spriteRen;
@@ -55,7 +58,7 @@ namespace GameJam
 
 		private void Start()
 		{
-			_state = PlayerAvatarState.Throw;
+			_state = PlayerAvatarState.Hold;
 			State = PlayerAvatarState.Walk;
 			curVel = Vector2.zero;
 			inputUseBuffer.Stop();
@@ -74,14 +77,27 @@ namespace GameJam
 			{
 				inputUseBuffer.Start();
 			}
+			
+			if (Input.GetButton("Fire2"))
+			{
+				inputAssembleBuffer.Start();
+			}
+
+			if (debugLog && UXHelper.TargetInteractable != null)
+			{
+				Debug.DrawRay(UXHelper.TargetInteractable.transform.position, Vector3.up, Color.white);
+				Debug.Log($"[PlayerAvatar] Target: {UXHelper.TargetInteractable.name}");
+			}
 		}
 
 		private void FixedUpdate()
 		{
+			UpdateTargetObject();
+
 			switch (State)
 			{
 				case PlayerAvatarState.Walk: StateWalk(); break;
-				case PlayerAvatarState.Throw: StateThrow(); break;
+				case PlayerAvatarState.Hold: StateUse(); break;
 
 				default:
 					State = PlayerAvatarState.Walk;
@@ -94,6 +110,49 @@ namespace GameJam
 		// =========================================================
 
 		private void StateWalk()
+		{
+			WalkStandard();
+
+			if (inputUseBuffer.Running && UXHelper.TargetInteractable != null)
+			{
+				inputUseBuffer.Stop();
+				StateUseEnter();
+				State = PlayerAvatarState.Hold;
+			}
+		}
+
+		private void StateUseEnter()
+		{
+			heldBucket = UXHelper.TargetInteractable.GetComponent<Bucket>();
+			UXHelper.TargetInteractable = null;
+			heldBucket.PickUp();
+			Debug.Log("Pickup " + heldBucket.name);
+		}
+
+		private void StateUse()
+		{
+			WalkStandard();
+
+			if (inputAssembleBuffer.Running)
+			{
+				inputAssembleBuffer.Stop();
+				Assemble();
+			}
+
+			if (inputUseBuffer.Running)
+			{
+				inputUseBuffer.Stop();
+				heldBucket.Throw();
+				heldBucket = null;
+				State = PlayerAvatarState.Walk;
+			}
+		}
+
+		// =========================================================
+		// Common
+		// =========================================================
+
+		private void WalkStandard()
 		{
 			float horz = Input.GetAxisRaw("Horizontal");
 
@@ -110,18 +169,64 @@ namespace GameJam
 			{
 				spriteRen.flipX = horz < 0;
 			}
-
-			if (inputUseBuffer.Running)
-			{
-				inputUseBuffer.Stop();
-				State = PlayerAvatarState.Throw;
-			}
 		}
 
-		private void StateThrow()
+		private void Assemble()
 		{
-			Debug.Log("yeet");
-			State = PlayerAvatarState.Walk;
+			var ingredients = heldBucket.contents;
+			heldBucket.ClearContents();
+
+			var monster = FindObjectOfType<AlchemyManager>().GetMonster(ingredients);
+			FindObjectOfType<CampaignManager>().SpawnMonster(heldBucket.trackId, monster);
+
+			Instantiate(config.assembleEffects, transform.position, transform.rotation);
+		}
+
+		// =========================================================
+		// Interactions
+		// =========================================================
+
+		private struct TargetSort
+		{
+			public GameObject obj;
+			public float height;
+			public float dx;
+		}
+
+		private void UpdateTargetObject()
+		{
+			if (State == PlayerAvatarState.Hold)
+			{
+				UXHelper.TargetInteractable = null;
+				return;
+			}
+
+			Vector2 circleCenter = (Vector2)interactArea.transform.position + interactArea.offset;
+			var list = Physics2D.OverlapCircleAll(circleCenter, interactArea.radius, interactMask)
+				.Where(x => x.GetComponent<Bucket>() != null);
+
+			GameObject target = null;
+			if (list.Any())
+			{
+				var sortY = list
+					.Select(x => new TargetSort()
+					{
+						obj = x.gameObject,
+						height = x.transform.position.y,
+						dx = Mathf.Abs(circleCenter.x - x.transform.position.x)
+					})
+					.OrderBy(x => x.height);
+
+				float minHeight = sortY.First().height;
+
+				target = sortY
+					.Where(x => Mathf.Abs(minHeight - x.height) < config.sameYTolerance)
+					.OrderBy(x => x.dx)
+					.First().obj;
+
+				// i want to die
+			}
+			UXHelper.TargetInteractable = target;
 		}
 	}
 }
