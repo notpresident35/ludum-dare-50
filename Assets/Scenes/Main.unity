@@ -331,11 +331,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ce5763b534fa24b93ba7a09712fc09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AllIngredients:
-  - {fileID: 11400000, guid: 05015c3137ab49943b0d8963975e718b, type: 2}
-  - {fileID: 11400000, guid: 67b27bebc70eb124eb2f714886acc2e4, type: 2}
-  AllMonsters:
-  - {fileID: 11400000, guid: 9c8b1d62157095947928b84421167035, type: 2}
+  AllIngredients: []
+  AllMonsters: []
 --- !u!4 &775981926
 Transform:
   m_ObjectHideFlags: 0

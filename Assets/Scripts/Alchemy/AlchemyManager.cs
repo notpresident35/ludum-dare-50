@@ -6,8 +6,17 @@ using UnityEngine;
 public class AlchemyManager : MonoBehaviour
 {
     
+    [HideInInspector]
     public List<Ingredient> AllIngredients;
+    [HideInInspector]
     public List<Monster> AllMonsters;
+
+    private void Awake() {
+        Ingredient[] ingredients = Array.ConvertAll(Resources.LoadAll("ScriptableObjects/Ingredients", typeof(Ingredient)), item => (Ingredient)item);
+        AllIngredients.AddRange(ingredients);
+        Monster[] monsters = Array.ConvertAll(Resources.LoadAll("ScriptableObjects/Monsters", typeof(Monster)), item => (Monster)item);
+        AllMonsters.AddRange(monsters);
+    }
 
     public Monster GetMonster (List<Ingredient> ingredients) {
         string recipe = IngredientsToRecipe(ingredients);
