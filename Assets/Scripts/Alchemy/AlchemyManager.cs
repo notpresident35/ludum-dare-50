@@ -17,7 +17,9 @@ public class AlchemyManager : MonoBehaviour
         AllMonsters.AddRange(Resources.LoadAll("ScriptableObjects/Monsters").Cast<Monster>());
     }
 
+    // Returns null if recipe fizzles
     public Monster GetMonster (List<Ingredient> ingredients) {
+
         string recipe = IngredientsToRecipe(ingredients);
 
         return GetMonster(recipe);
