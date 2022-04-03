@@ -22,10 +22,10 @@ public class CampaignManager : MonoBehaviour
     }
 
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Mouse0)) {
+        if (Input.GetMouseButtonDown(0)) {
             SpawnMonster(0, alchem.GetRandomMonster());
         }
-        if (Input.GetKeyDown(KeyCode.Mouse1)) {
+        if (Input.GetMouseButtonDown(1)) {
             SpawnHero(0, Resources.Load<Hero>("ScriptableObjects/Heroes/Default"));
         }
     }
@@ -39,6 +39,7 @@ public class CampaignManager : MonoBehaviour
         HeroInstance newHero = Instantiate(HeroPrefab, Tracks[trackID].HeroSpawnpoint.position, Quaternion.identity, Tracks[trackID].transform).GetComponent<HeroInstance>();
         newHero.hero = hero;
         newHero.Spawn();
+        Tracks[trackID].AttachHero(newHero);
     }
 
     public void SpawnMonster (int trackID, Monster monster) {
@@ -46,5 +47,6 @@ public class CampaignManager : MonoBehaviour
         newMonster.transform.parent = Tracks[trackID].transform;
         newMonster.monster = monster;
         newMonster.Spawn();
+        Tracks[trackID].AttachMonster(newMonster);
     }
 }

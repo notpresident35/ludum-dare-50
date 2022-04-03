@@ -13,5 +13,13 @@ MonoBehaviour:
   m_Name: Default
   m_EditorClassIdentifier: 
   Health: 100
-  Speed: 50
+  Damage: 5
+  Size: 1
+  Speed: 0.2
   sprite: {fileID: -5177388603050735206, guid: 71ebafeef3c03457483266a33ab2b270, type: 3}
+  AttackMask:
+    serializedVersion: 2
+    m_Bits: 128
+  FriendlyMask:
+    serializedVersion: 2
+    m_Bits: 64

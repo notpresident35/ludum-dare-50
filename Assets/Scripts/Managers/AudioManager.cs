@@ -13,6 +13,7 @@ public class AudioManager : MonoBehaviour
     List<AudioSource> musicSources;
 
     private void Awake() {
+        musicSources = new List<AudioSource>();
         foreach (Transform child in transform) {
             musicSources.Add (child.GetComponent<AudioSource>());
         }

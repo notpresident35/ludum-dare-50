@@ -15,19 +15,35 @@ public class Track : MonoBehaviour
 
     public void AttachHero (HeroInstance hero) {
         CurrentHero = hero;
+        hero.track = this;
+    }
+
+    public void DetachHero () {
+        CurrentHero = null;
+    }
+
+    public void AttachMonster (MonsterInstance monster) {
+        CurrentMonsters.Add(monster);
+        monster.track = this;
+    }
+
+    public void DetachMonster (MonsterInstance monster) {
+        CurrentMonsters.Remove(monster);
     }
 
     void Update(){
-        CurrentHero.Move();
-
-        foreach (MonsterInstance monster in CurrentMonsters) {
-            monster.Move();
+        if (!CurrentHero) {
+            return;
         }
-        
-        CurrentHero.Attack();
+
+        if (!CurrentHero.Attack()) {
+            CurrentHero.Move();
+        }
 
         foreach (MonsterInstance monster in CurrentMonsters) {
-            monster.Attack();
+            if (!monster.Attack()) {
+                monster.Move();
+            }
         }
     }
 }

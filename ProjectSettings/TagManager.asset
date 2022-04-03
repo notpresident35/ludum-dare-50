@@ -11,13 +11,13 @@ TagManager:
   - 
   - Water
   - UI
+  - Heroes
+  - Monsters
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Entity
+  - Bucket
   - 
   - 
   - 
