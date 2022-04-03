@@ -15,20 +15,24 @@ namespace GameJam
 		public Transform MonsterSpawnpoint;
 		public Transform HeroSpawnpoint;
 
+		private void Awake()
+		{
+			CurrentMonsters = new List<MonsterInstance>();
+		}
+
 		public void AttachHero(HeroInstance hero)
 		{
 			CurrentHero = hero;
-			hero.track = this;
 		}
 
 		public void AttachMonster(MonsterInstance monster)
 		{
 			CurrentMonsters.Add(monster);
-			monster.track = this;
 		}
 
 		void Update()
 		{
+			// Monsters will wait around until a new hero appears if a hero dies
 			if (!CurrentHero)
 			{
 				return;
@@ -37,63 +41,44 @@ namespace GameJam
 			/* 
 			HERO
 			*/
-			bool heroInRange = CurrentMonsters[0].transform.position.y <= CurrentHero.transform.position.y + CurrentHero.entity.AttackRange;
-
-			if (heroInRange)
+			if (CurrentMonsters.Count < 1)
 			{
-				CurrentHero.Attack(CurrentMonsters[0].GetComponent<Health>());
+				CurrentHero.TryMove(null);
+				return;
 			}
-			else
+
+			if (!CurrentHero.TryMove(CurrentMonsters[0]?.transform))
 			{
-				CurrentHero.TryMove(CurrentMonsters[0].transform);
+				if (CurrentHero.Attack(CurrentMonsters[0]?.GetComponent<Health>()))
+				{
+					CurrentMonsters.RemoveAt(0);
+				}
 			}
 
 			/* 
 			FIRST MONSTER
 			*/
-			if (CurrentMonsters.Count < 1)
+			if (CurrentMonsters.Count > 0 && CurrentMonsters[0] != null)
 			{
-				return;
+				if (!CurrentMonsters[0].TryMove(CurrentHero?.transform))
+				{
+					if (CurrentMonsters[0].Attack(CurrentHero?.GetComponent<Health>()))
+					{
+						CurrentHero = null;
+					}
+				}
 			}
-
-			bool monsterInRange = CurrentHero.transform.position.y <= CurrentMonsters[0].transform.position.y - CurrentMonsters[0].entity.AttackRange;
-
-			if (monsterInRange)
-			{
-				CurrentMonsters[0].Attack(CurrentHero.GetComponent<Health>());
-			}
-			else
-			{
-				CurrentMonsters[0].TryMove(CurrentHero.transform);
-			}
-
 
 			/* 
 			ALL OTHER MONSTERS
 			*/
-			if (CurrentMonsters.Count < 2)
+			if (CurrentMonsters.Count > 1)
 			{
-				return;
-			}
-
-			for (int i = 1; i < CurrentMonsters.Count; i++)
-			{
-				CurrentMonsters[i].TryMove(CurrentMonsters[i - 1].transform);
-			}
-
-			CleanMonsterList();
-		}
-
-		void CleanMonsterList()
-		{
-			for (int i = CurrentMonsters.Count; i < 0; i--)
-			{
-				if (CurrentMonsters[i] == null)
+				for (int i = 1; i < CurrentMonsters.Count; i++)
 				{
-					CurrentMonsters.RemoveAt(i);
+					CurrentMonsters[i]?.TryMove(CurrentMonsters[i - 1]?.transform);
 				}
 			}
-
 		}
 	}
 }

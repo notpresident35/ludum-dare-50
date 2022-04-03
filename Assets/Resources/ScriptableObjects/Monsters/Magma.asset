@@ -14,12 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 20
   Damage: 1
-  Size: 0.7
+  Size: 0.5
   Speed: 0.5
-  Recipes:
-  - SF
-  - SSF
-  - SFF
   sprite: {fileID: -2135585597343286014, guid: 4b2a04fdbe0ef4d8da8f90eaca817cd1, type: 3}
   AttackMask:
     serializedVersion: 2
@@ -27,3 +23,7 @@ MonoBehaviour:
   FriendlyMask:
     serializedVersion: 2
     m_Bits: 128
+  Recipes:
+  - SF
+  - SSF
+  - SFF

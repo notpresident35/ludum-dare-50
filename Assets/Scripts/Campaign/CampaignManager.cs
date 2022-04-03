@@ -17,6 +17,7 @@ namespace GameJam
 		private void Start()
 		{
 			AddTrack();
+			SpawnHero(0, Resources.Load<Hero>("ScriptableObjects/Heroes/Default"));
 		}
 
 		public void AddTrack()
