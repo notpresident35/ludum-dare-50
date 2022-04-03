@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,10 +13,8 @@ public class AlchemyManager : MonoBehaviour
     public List<Monster> AllMonsters;
 
     private void Awake() {
-        Ingredient[] ingredients = Array.ConvertAll(Resources.LoadAll("ScriptableObjects/Ingredients", typeof(Ingredient)), item => (Ingredient)item);
-        AllIngredients.AddRange(ingredients);
-        Monster[] monsters = Array.ConvertAll(Resources.LoadAll("ScriptableObjects/Monsters", typeof(Monster)), item => (Monster)item);
-        AllMonsters.AddRange(monsters);
+        AllIngredients.AddRange(Resources.LoadAll("ScriptableObjects/Ingredients").Cast<Ingredient>());
+        AllMonsters.AddRange(Resources.LoadAll("ScriptableObjects/Monsters").Cast<Monster>());
     }
 
     public Monster GetMonster (List<Ingredient> ingredients) {
