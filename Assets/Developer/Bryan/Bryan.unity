@@ -246,6 +246,42 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3727755014347959710, guid: 47d1905d57baec44180c6d0fa5e0242f, type: 3}
+      propertyPath: IntensityToSpawnrate.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3727755014347959710, guid: 47d1905d57baec44180c6d0fa5e0242f, type: 3}
+      propertyPath: IntensityToSpawnrate.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3727755014347959710, guid: 47d1905d57baec44180c6d0fa5e0242f, type: 3}
+      propertyPath: IntensityToSpawnrate.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3727755014347959710, guid: 47d1905d57baec44180c6d0fa5e0242f, type: 3}
+      propertyPath: IntensityToSpawnrate.m_Curve.Array.data[0].inSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3727755014347959710, guid: 47d1905d57baec44180c6d0fa5e0242f, type: 3}
+      propertyPath: IntensityToSpawnrate.m_Curve.Array.data[1].inSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3727755014347959710, guid: 47d1905d57baec44180c6d0fa5e0242f, type: 3}
+      propertyPath: IntensityToSpawnrate.m_Curve.Array.data[0].outSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3727755014347959710, guid: 47d1905d57baec44180c6d0fa5e0242f, type: 3}
+      propertyPath: IntensityToSpawnrate.m_Curve.Array.data[1].outSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3727755014347959710, guid: 47d1905d57baec44180c6d0fa5e0242f, type: 3}
+      propertyPath: IntensityToSpawnrate.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 3727755014347959710, guid: 47d1905d57baec44180c6d0fa5e0242f, type: 3}
+      propertyPath: IntensityToSpawnrate.m_Curve.Array.data[1].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
     - target: {fileID: 6568133162484816863, guid: 47d1905d57baec44180c6d0fa5e0242f, type: 3}
       propertyPath: m_Name
       value: Toolkit
@@ -660,6 +696,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bone
       objectReference: {fileID: 0}
+    - target: {fileID: 9159136137279565937, guid: 4260d0ed6f7e6384bbc8a6470d65c67c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4260d0ed6f7e6384bbc8a6470d65c67c, type: 3}
 --- !u!1001 &1208240196
@@ -1013,6 +1053,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
+    - target: {fileID: 3629310843877323514, guid: 74bf2e27c85a5cb4398acb1b98f03a22, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3629310843877323515, guid: 74bf2e27c85a5cb4398acb1b98f03a22, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1173,6 +1217,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 825939588300867426, guid: 12c06eab99b0f6c4895c9dba322edec4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852616423291067129, guid: 12c06eab99b0f6c4895c9dba322edec4, type: 3}
+      propertyPath: trackId
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3571376509942384170, guid: 12c06eab99b0f6c4895c9dba322edec4, type: 3}
