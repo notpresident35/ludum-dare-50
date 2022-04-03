@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -36,6 +35,11 @@ public class AlchemyManager : MonoBehaviour
         return null;
     } 
 
+    // Use just for testing plz and ty
+    public Monster GetRandomMonster () {
+        return AllMonsters[Random.Range(0, AllMonsters.Count)];
+    } 
+
     public List<Ingredient> RecipeToIngredients (string ingredients) {
         
         List<Ingredient> output = new List<Ingredient>();
@@ -71,7 +75,7 @@ public class AlchemyManager : MonoBehaviour
     static string SortString(string input)
     {
         char[] characters = input.ToCharArray();
-        Array.Sort(characters);
+        System.Array.Sort(characters);
         return new string(characters);
     }
 }
