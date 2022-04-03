@@ -26,7 +26,7 @@ namespace GameJam
 
 		public virtual void Die()
 		{
-
+			Destroy(gameObject);
 		}
 	}
 }
