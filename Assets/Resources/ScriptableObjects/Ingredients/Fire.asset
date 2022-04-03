@@ -15,4 +15,4 @@ MonoBehaviour:
   Abbreviation: 70
   Frequency: 1
   GravityModifier: 1
-  FallingPrefab: {fileID: 0}
+  Icon: {fileID: -2716938532715670413, guid: 53d7ae54bbc393441ad330391f8cb2a7, type: 3}

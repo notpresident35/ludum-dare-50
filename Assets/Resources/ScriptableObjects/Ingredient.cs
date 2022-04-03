@@ -9,5 +9,5 @@ public class Ingredient : ScriptableObject
 	public int Frequency;
 	[Range(0, 5)]
 	public float GravityModifier;
-	public GameObject FallingPrefab;
+	public Sprite Icon;
 }
