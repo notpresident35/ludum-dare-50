@@ -2,64 +2,70 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Track : MonoBehaviour
+namespace GameJam
 {
-
-	[HideInInspector]
-	public HeroInstance CurrentHero;
-	[HideInInspector]
-	public List<MonsterInstance> CurrentMonsters;
-
-	public Transform MonsterSpawnpoint;
-	public Transform HeroSpawnpoint;
-
-	public void AttachHero(HeroInstance hero)
+	public class Track : MonoBehaviour
 	{
-		CurrentHero = hero;
-		hero.track = this;
-	}
 
-	public void AttachMonster(MonsterInstance monster)
-	{
-		CurrentMonsters.Add(monster);
-		monster.track = this;
-	}
+		[HideInInspector]
+		public HeroInstance CurrentHero;
+		[HideInInspector]
+		public List<MonsterInstance> CurrentMonsters;
 
-	void Update()
-	{
-		if (!CurrentHero)
+		public Transform MonsterSpawnpoint;
+		public Transform HeroSpawnpoint;
+
+		public void AttachHero(HeroInstance hero)
 		{
-			return;
+			CurrentHero = hero;
+			hero.track = this;
 		}
 
-		if (!CurrentHero.Attack())
+		public void AttachMonster(MonsterInstance monster)
 		{
-			CurrentHero.Move();
+			CurrentMonsters.Add(monster);
+			monster.track = this;
 		}
 
-		foreach (MonsterInstance monster in CurrentMonsters)
+		void Update()
 		{
-			if (monster == null) {
+			if (!CurrentHero)
+			{
 				return;
 			}
 
-			if (!monster.Attack())
+			if (!CurrentHero.Attack())
 			{
-			
-				monster.Move();
+				CurrentHero.Move();
 			}
+
+			foreach (MonsterInstance monster in CurrentMonsters)
+			{
+				if (monster == null)
+				{
+					return;
+				}
+
+				if (!monster.Attack())
+				{
+
+					monster.Move();
+				}
+			}
+
+			CleanMonsterList();
 		}
 
-		CleanMonsterList();
-	}
-
-	void CleanMonsterList(){
-		for (int i = CurrentMonsters.Count; i < 0; i--) {
-			if (CurrentMonsters[i] == null) {
-				CurrentMonsters.RemoveAt(i);
+		void CleanMonsterList()
+		{
+			for (int i = CurrentMonsters.Count; i < 0; i--)
+			{
+				if (CurrentMonsters[i] == null)
+				{
+					CurrentMonsters.RemoveAt(i);
+				}
 			}
+
 		}
-	
 	}
-		
 }

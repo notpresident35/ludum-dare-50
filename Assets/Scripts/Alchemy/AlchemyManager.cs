@@ -3,81 +3,96 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AlchemyManager : MonoBehaviour
+namespace GameJam
 {
-    
-    [HideInInspector]
-    public List<Ingredient> AllIngredients;
-    [HideInInspector]
-    public List<Monster> AllMonsters;
+	public class AlchemyManager : MonoBehaviour
+	{
 
-    private void Awake() {
-        AllIngredients = new List<Ingredient>();
-        AllIngredients.AddRange(Resources.LoadAll("ScriptableObjects/Ingredients").Cast<Ingredient>());
-        AllMonsters = new List<Monster>();
-        AllMonsters.AddRange(Resources.LoadAll("ScriptableObjects/Monsters").Cast<Monster>());
-    }
+		[HideInInspector]
+		public List<Ingredient> AllIngredients;
+		[HideInInspector]
+		public List<Monster> AllMonsters;
 
-    // Returns null if recipe fizzles
-    public Monster GetMonster (List<Ingredient> ingredients) {
+		private void Awake()
+		{
+			AllIngredients = new List<Ingredient>();
+			AllIngredients.AddRange(Resources.LoadAll<Ingredient>("ScriptableObjects/Ingredients"));
+			AllMonsters = new List<Monster>();
+			AllMonsters.AddRange(Resources.LoadAll<Monster>("ScriptableObjects/Monsters"));
+		}
 
-        string recipe = IngredientsToRecipe(ingredients);
+		// Returns null if recipe fizzles
+		public Monster GetMonster(List<Ingredient> ingredients)
+		{
 
-        return GetMonster(recipe);
-    } 
+			string recipe = IngredientsToRecipe(ingredients);
 
-    // Returns null if recipe fizzles
-    public Monster GetMonster (string recipe) {
-        string sortedRecipe = SortString(recipe);
-        foreach (Monster monster in AllMonsters) {
-            if (monster.Recipes.Contains(sortedRecipe)) {
-                return monster;
-            }
-        }
-        return null;
-    } 
+			return GetMonster(recipe);
+		}
 
-    // Use just for testing plz and ty
-    public Monster GetRandomMonster () {
-        return AllMonsters[Random.Range(0, AllMonsters.Count)];
-    } 
+		// Returns null if recipe fizzles
+		public Monster GetMonster(string recipe)
+		{
+			string sortedRecipe = SortString(recipe);
+			foreach (Monster monster in AllMonsters)
+			{
+				if (monster.Recipes.Contains(sortedRecipe))
+				{
+					return monster;
+				}
+			}
+			return null;
+		}
 
-    public List<Ingredient> RecipeToIngredients (string ingredients) {
-        
-        List<Ingredient> output = new List<Ingredient>();
+		// Use just for testing plz and ty
+		public Monster GetRandomMonster()
+		{
+			return AllMonsters[Random.Range(0, AllMonsters.Count)];
+		}
 
-        for (int i = 0; i < ingredients.Length; i++) {
-            foreach (Ingredient ingredient in AllIngredients) {
-                if (ingredients[i] == ingredient.Abbreviation) {
-                    output.Add(ingredient);
-                    break;
-                }
-            }
-        }
+		public List<Ingredient> RecipeToIngredients(string ingredients)
+		{
 
-        return output;
-    }
+			List<Ingredient> output = new List<Ingredient>();
 
-    public string IngredientsToRecipe (List<Ingredient> ingredients) {
-        
-        string output = "";
+			for (int i = 0; i < ingredients.Length; i++)
+			{
+				foreach (Ingredient ingredient in AllIngredients)
+				{
+					if (ingredients[i] == ingredient.Abbreviation)
+					{
+						output.Add(ingredient);
+						break;
+					}
+				}
+			}
 
-        foreach (Ingredient ingredient in AllIngredients) {
-            output += ingredient.Abbreviation;
-        }
+			return output;
+		}
 
-        return output;
-    }
+		public string IngredientsToRecipe(List<Ingredient> ingredients)
+		{
 
-    // Tester
-    /*private void Start() {
-        print (GetMonster("MM"));
-    }*/
+			string output = "";
 
-    static string SortString(string input)
-    {
-        char[] characters = input.ToCharArray();
-        System.Array.Sort(characters);
-        return new string(characters);
-    }
+			foreach (Ingredient ingredient in AllIngredients)
+			{
+				output += ingredient.Abbreviation;
+			}
+
+			return output;
+		}
+
+		// Tester
+		/*private void Start() {
+			print (GetMonster("MM"));
+		}*/
+
+		static string SortString(string input)
+		{
+			char[] characters = input.ToCharArray();
+			System.Array.Sort(characters);
+			return new string(characters);
+		}
+	}
 }
