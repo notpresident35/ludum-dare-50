@@ -621,8 +621,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 1
     - serializedVersion: 3
-      time: 932.5016
-      value: 5.454324
+      time: 3.4960938
+      value: 0.9491854
       inSlope: 0.0058002668
       outSlope: 0.0058002668
       tangentMode: 0
@@ -800,3 +800,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mixer: {fileID: 24100000, guid: dde20e31c5e953644b5782a729e95cfb, type: 2}
+  SFXPlayerPrefab: {fileID: 0}
