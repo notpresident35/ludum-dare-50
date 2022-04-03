@@ -22,17 +22,8 @@ namespace GameJam
 		}
 
 		// Returns null if recipe fizzles
-		public Monster GetMonster(List<Ingredient> ingredients)
-		{
-
-			string recipe = IngredientsToRecipe(ingredients);
-
-			return GetMonster(recipe);
-		}
-
 		public Monster GetMonster(IEnumerable<Ingredient> ingredients)
 		{
-
 			string recipe = IngredientsToRecipe(ingredients);
 
 			return GetMonster(recipe);
@@ -61,6 +52,11 @@ namespace GameJam
 		public List<Ingredient> RecipeToIngredients(string ingredients)
 		{
 
+			if (ingredients == $"``")
+			{
+				Debug.LogError("Received an empty recipe");
+			}
+
 			List<Ingredient> output = new List<Ingredient>();
 
 			for (int i = 0; i < ingredients.Length; i++)
@@ -78,29 +74,14 @@ namespace GameJam
 			return output;
 		}
 
-		public string IngredientsToRecipe(List<Ingredient> ingredients)
-		{
-
-			string output = "";
-
-			foreach (Ingredient ingredient in AllIngredients)
-			{
-				output += ingredient.Abbreviation;
-			}
-
-			return output;
-		}
-
 		public string IngredientsToRecipe(IEnumerable<Ingredient> ingredients)
 		{
-
-			string output = "";
-
-			foreach (Ingredient ingredient in AllIngredients)
+			if (ingredients == null)
 			{
-				output += ingredient.Abbreviation;
+				return string.Empty;
 			}
-
+			string output = string.Join("", ingredients.Select(x => x.Abbreviation));
+			Debug.Log($"AbbrStr: `{output}`");
 			return output;
 		}
 

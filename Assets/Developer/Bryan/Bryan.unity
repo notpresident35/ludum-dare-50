@@ -246,42 +246,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3727755014347959710, guid: 47d1905d57baec44180c6d0fa5e0242f, type: 3}
-      propertyPath: IntensityToSpawnrate.m_Curve.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3727755014347959710, guid: 47d1905d57baec44180c6d0fa5e0242f, type: 3}
-      propertyPath: IntensityToSpawnrate.m_Curve.Array.data[1].time
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3727755014347959710, guid: 47d1905d57baec44180c6d0fa5e0242f, type: 3}
-      propertyPath: IntensityToSpawnrate.m_Curve.Array.data[1].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3727755014347959710, guid: 47d1905d57baec44180c6d0fa5e0242f, type: 3}
-      propertyPath: IntensityToSpawnrate.m_Curve.Array.data[0].inSlope
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3727755014347959710, guid: 47d1905d57baec44180c6d0fa5e0242f, type: 3}
-      propertyPath: IntensityToSpawnrate.m_Curve.Array.data[1].inSlope
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3727755014347959710, guid: 47d1905d57baec44180c6d0fa5e0242f, type: 3}
-      propertyPath: IntensityToSpawnrate.m_Curve.Array.data[0].outSlope
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3727755014347959710, guid: 47d1905d57baec44180c6d0fa5e0242f, type: 3}
-      propertyPath: IntensityToSpawnrate.m_Curve.Array.data[1].outSlope
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3727755014347959710, guid: 47d1905d57baec44180c6d0fa5e0242f, type: 3}
-      propertyPath: IntensityToSpawnrate.m_Curve.Array.data[0].tangentMode
-      value: 34
-      objectReference: {fileID: 0}
-    - target: {fileID: 3727755014347959710, guid: 47d1905d57baec44180c6d0fa5e0242f, type: 3}
-      propertyPath: IntensityToSpawnrate.m_Curve.Array.data[1].tangentMode
-      value: 34
-      objectReference: {fileID: 0}
     - target: {fileID: 6568133162484816863, guid: 47d1905d57baec44180c6d0fa5e0242f, type: 3}
       propertyPath: m_Name
       value: Toolkit

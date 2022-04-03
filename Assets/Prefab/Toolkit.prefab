@@ -122,6 +122,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a2fb00605158a34bb7eea0adc1fb1ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IntensityToSpawnrate:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.78260803
+      inSlope: 0.059694618
+      outSlope: 0.059694618
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.11054637
+    - serializedVersion: 3
+      time: 0.9992676
+      value: 2.520149
+      inSlope: 0.00075151963
+      outSlope: 0.00075151963
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.26937723
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   leftSpawnBorder: {fileID: 4135463500601689564}
   rightSpawnBorder: {fileID: 3454732841460733680}
 --- !u!1 &4135463500601689564
@@ -198,6 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mixer: {fileID: 24100000, guid: dde20e31c5e953644b5782a729e95cfb, type: 2}
+  SFXPlayerPrefab: {fileID: 6646565419151427553, guid: 4d24734b23b21ba48a9460aacbfbb98c, type: 3}
 --- !u!1 &4540190044875927682
 GameObject:
   m_ObjectHideFlags: 0
