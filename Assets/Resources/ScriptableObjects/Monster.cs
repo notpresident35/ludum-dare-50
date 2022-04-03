@@ -6,4 +6,5 @@ using UnityEngine;
 public class Monster : ScriptableObject
 {
     public List<string> Recipes;
+    public Sprite sprite;
 }
