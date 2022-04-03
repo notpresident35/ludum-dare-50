@@ -16,4 +16,18 @@ public class Track : MonoBehaviour
     public void AttachHero (HeroInstance hero) {
         CurrentHero = hero;
     }
+
+    void Update(){
+        CurrentHero.Move();
+
+        foreach (MonsterInstance monster in CurrentMonsters) {
+            monster.Move();
+        }
+        
+        CurrentHero.Attack();
+
+        foreach (MonsterInstance monster in CurrentMonsters) {
+            monster.Attack();
+        }
+    }
 }
