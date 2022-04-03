@@ -33,7 +33,6 @@ public class MonsterInstance : Instanceable
 	public override void Die()
 	{
 		base.Die();
-        track.DetachMonster(this);
-        Destroy(gameObject);
+		Destroy(gameObject);
 	}
 }

@@ -29,10 +29,8 @@ public class HeroInstance : Instanceable
         return false;
     }
 
-    public override void Die()
+	public override void Die()
 	{
-		base.Die();
-        track.DetachHero();
-        Destroy(gameObject);
+		// TODO: Assign new hero data and RESPAWN :)
 	}
 }

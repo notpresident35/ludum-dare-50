@@ -4,46 +4,62 @@ using UnityEngine;
 
 public class Track : MonoBehaviour
 {
-    
-    [HideInInspector]
-    public HeroInstance CurrentHero;
-    [HideInInspector]
-    public List<MonsterInstance> CurrentMonsters;
 
-    public Transform MonsterSpawnpoint;
-    public Transform HeroSpawnpoint;
+	[HideInInspector]
+	public HeroInstance CurrentHero;
+	[HideInInspector]
+	public List<MonsterInstance> CurrentMonsters;
 
-    public void AttachHero (HeroInstance hero) {
-        CurrentHero = hero;
-        hero.track = this;
-    }
+	public Transform MonsterSpawnpoint;
+	public Transform HeroSpawnpoint;
 
-    public void DetachHero () {
-        CurrentHero = null;
-    }
+	public void AttachHero(HeroInstance hero)
+	{
+		CurrentHero = hero;
+		hero.track = this;
+	}
 
-    public void AttachMonster (MonsterInstance monster) {
-        CurrentMonsters.Add(monster);
-        monster.track = this;
-    }
+	public void AttachMonster(MonsterInstance monster)
+	{
+		CurrentMonsters.Add(monster);
+		monster.track = this;
+	}
 
-    public void DetachMonster (MonsterInstance monster) {
-        CurrentMonsters.Remove(monster);
-    }
+	void Update()
+	{
+		if (!CurrentHero)
+		{
+			return;
+		}
 
-    void Update(){
-        if (!CurrentHero) {
-            return;
-        }
+		if (!CurrentHero.Attack())
+		{
+			CurrentHero.Move();
+		}
 
-        if (!CurrentHero.Attack()) {
-            CurrentHero.Move();
-        }
+		foreach (MonsterInstance monster in CurrentMonsters)
+		{
+			if (monster == null) {
+				return;
+			}
 
-        foreach (MonsterInstance monster in CurrentMonsters) {
-            if (!monster.Attack()) {
-                monster.Move();
-            }
-        }
-    }
+			if (!monster.Attack())
+			{
+			
+				monster.Move();
+			}
+		}
+
+		CleanMonsterList();
+	}
+
+	void CleanMonsterList(){
+		for (int i = CurrentMonsters.Count; i < 0; i--) {
+			if (CurrentMonsters[i] == null) {
+				CurrentMonsters.RemoveAt(i);
+			}
+		}
+	
+	}
+		
 }
