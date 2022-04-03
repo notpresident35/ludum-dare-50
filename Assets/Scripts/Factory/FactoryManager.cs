@@ -9,6 +9,8 @@ namespace GameJam
 	{
 		List<Ingredient> IngredientBag;
 
+		public AnimationCurve IntensityToSpawnrate;
+
 		public GameObject leftSpawnBorder;
 		public GameObject rightSpawnBorder;
 
@@ -17,6 +19,9 @@ namespace GameJam
 		float spawn_x_min;
 		float spawn_x_max;
 		float spawn_y;
+
+		public float spawnrate = 0;
+		public float spawnTimer = 0;
 
 		void Awake()
 		{
@@ -62,6 +67,11 @@ namespace GameJam
 			Instantiate(prefab, position, prefab.transform.rotation, transform);
 		}
 
+		public void SetSpawnIntensity(float intensity)
+		{
+			spawnrate = IntensityToSpawnrate.Evaluate(Mathf.Min(intensity, IntensityToSpawnrate.keys[IntensityToSpawnrate.length - 1].time));
+		}
+
 		void Start()
 		{
 			float left_x = leftSpawnBorder.transform.position.x;
@@ -76,10 +86,12 @@ namespace GameJam
 
 		void Update()
 		{
-			// for testing, does not work currently
-			if (Input.GetKeyDown(KeyCode.Space))
+			spawnTimer += Time.deltaTime * spawnrate;
+
+			if (spawnTimer > 1)
 			{
 				SpawnIngredient();
+				spawnTimer = 0;
 			}
 		}
 	}

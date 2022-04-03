@@ -10,16 +10,19 @@ namespace GameJam
 		public AnimationCurve IntensityCurve;
 
 		private AudioManager audioManager;
+		private FactoryManager factoryManager;
 
 		void Awake()
 		{
 			audioManager = GameObject.FindObjectOfType<AudioManager>();
+			factoryManager = GameObject.FindObjectOfType<FactoryManager>();
 		}
 
 		void Update()
 		{
-			float intensity = Mathf.Min(IntensityCurve.Evaluate(Time.time), 1);
+			float intensity = IntensityCurve.Evaluate(Mathf.Min(Time.time, IntensityCurve.keys[IntensityCurve.length - 1].time));
 			audioManager.SetMusicIntensity(intensity);
+			factoryManager.SetSpawnIntensity(intensity);
 		}
 	}
 }

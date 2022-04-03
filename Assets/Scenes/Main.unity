@@ -614,20 +614,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0.0065630404
-      outSlope: 0.0065630404
+      inSlope: 0.0046287933
+      outSlope: 0.0046287933
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 1
+      outWeight: 0.20838632
     - serializedVersion: 3
-      time: 3.4960938
-      value: 0.9491854
-      inSlope: 0.0058002668
-      outSlope: 0.0058002668
+      time: 598.70435
+      value: 1.2476778
+      inSlope: 0.00075151963
+      outSlope: 0.00075151963
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.98119897
+      inWeight: 0.26937723
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -736,8 +736,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a2fb00605158a34bb7eea0adc1fb1ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IntensityToSpawnrate:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.78260803
+      inSlope: 0.059694618
+      outSlope: 0.059694618
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.11054637
+    - serializedVersion: 3
+      time: 0.9992676
+      value: 2.520149
+      inSlope: 0.00075151963
+      outSlope: 0.00075151963
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.26937723
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   leftSpawnBorder: {fileID: 610307991}
   rightSpawnBorder: {fileID: 1229493809}
+  spawnrate: 0
+  spawnTimer: 0
 --- !u!4 &1514887852
 Transform:
   m_ObjectHideFlags: 0
@@ -800,4 +826,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mixer: {fileID: 24100000, guid: dde20e31c5e953644b5782a729e95cfb, type: 2}
-  SFXPlayerPrefab: {fileID: 0}
+  SFXPlayerPrefab: {fileID: 6646565419151427553, guid: 4d24734b23b21ba48a9460aacbfbb98c, type: 3}
