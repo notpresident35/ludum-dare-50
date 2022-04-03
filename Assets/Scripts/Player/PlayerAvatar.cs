@@ -77,8 +77,8 @@ namespace GameJam
 			{
 				inputUseBuffer.Start();
 			}
-			
-			if (Input.GetButton("Fire2"))
+
+			if (Input.GetButtonDown("Fire2"))
 			{
 				inputAssembleBuffer.Start();
 			}
@@ -173,9 +173,11 @@ namespace GameJam
 
 		private void Assemble()
 		{
-			var ingredients = heldBucket.contents;
+			var ingredients = new List<Ingredient>(heldBucket.contents);
 			heldBucket.ClearContents();
 
+			Debug.Log("Contents: " + string.Join(", ", ingredients));
+			// TODO: If null, fancy stuff (recipe fizzles)
 			var monster = FindObjectOfType<AlchemyManager>().GetMonster(ingredients);
 			FindObjectOfType<CampaignManager>().SpawnMonster(heldBucket.trackId, monster);
 

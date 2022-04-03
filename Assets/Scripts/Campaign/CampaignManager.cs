@@ -32,6 +32,11 @@ namespace GameJam
 				Debug.LogError("Tried to spawn hero with invalid track id!");
 				return;
 			}
+			if (hero == null)
+			{
+				Debug.Log("Did not spawn hero - reference was null");
+				return;
+			}
 			HeroInstance newHero = Instantiate(HeroPrefab, Tracks[trackID].HeroSpawnpoint.position, Quaternion.identity, Tracks[trackID].transform).GetComponent<HeroInstance>();
 			newHero.entity = hero;
 			newHero.Spawn();
@@ -44,6 +49,11 @@ namespace GameJam
 			if (trackID == -1)
 			{
 				Debug.LogError("Tried to spawn monster with invalid track id!");
+				return;
+			}
+			if (monster == null)
+			{
+				Debug.Log("Did not spawn monster - reference was null");
 				return;
 			}
 			MonsterInstance newMonster = Instantiate(MonsterPrefab, Tracks[trackID].MonsterSpawnpoint.position, Quaternion.identity, Tracks[trackID].transform).GetComponent<MonsterInstance>();
