@@ -20,8 +20,8 @@ namespace GameJam
 		float spawn_x_max;
 		float spawn_y;
 
-		public float spawnrate = 0;
-		public float spawnTimer = 0;
+		float spawnrate = 0;
+		float spawnTimer = 0;
 
 		void Awake()
 		{
