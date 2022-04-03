@@ -762,8 +762,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   leftSpawnBorder: {fileID: 610307991}
   rightSpawnBorder: {fileID: 1229493809}
-  spawnrate: 0
-  spawnTimer: 0
 --- !u!4 &1514887852
 Transform:
   m_ObjectHideFlags: 0

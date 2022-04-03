@@ -34,23 +34,51 @@ namespace GameJam
 				return;
 			}
 
-			if (!CurrentHero.Attack())
+			/* 
+			HERO
+			*/
+			bool heroInRange = CurrentMonsters[0].transform.position.y <= CurrentHero.transform.position.y + CurrentHero.entity.AttackRange;
+
+			if (heroInRange)
 			{
-				CurrentHero.Move();
+				CurrentHero.Attack(CurrentMonsters[0].GetComponent<Health>());
+			}
+			else
+			{
+				CurrentHero.TryMove(CurrentMonsters[0].transform);
 			}
 
-			foreach (MonsterInstance monster in CurrentMonsters)
+			/* 
+			FIRST MONSTER
+			*/
+			if (CurrentMonsters.Count < 1)
 			{
-				if (monster == null)
-				{
-					return;
-				}
+				return;
+			}
 
-				if (!monster.Attack())
-				{
+			bool monsterInRange = CurrentHero.transform.position.y <= CurrentMonsters[0].transform.position.y - CurrentMonsters[0].entity.AttackRange;
 
-					monster.Move();
-				}
+			if (monsterInRange)
+			{
+				CurrentMonsters[0].Attack(CurrentHero.GetComponent<Health>());
+			}
+			else
+			{
+				CurrentMonsters[0].TryMove(CurrentHero.transform);
+			}
+
+
+			/* 
+			ALL OTHER MONSTERS
+			*/
+			if (CurrentMonsters.Count < 2)
+			{
+				return;
+			}
+
+			for (int i = 1; i < CurrentMonsters.Count; i++)
+			{
+				CurrentMonsters[i].TryMove(CurrentMonsters[i - 1].transform);
 			}
 
 			CleanMonsterList();
