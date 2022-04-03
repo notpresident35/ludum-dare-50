@@ -11,11 +11,23 @@ public class CampaignManager : MonoBehaviour
     public GameObject MonsterPrefab;
     public GameObject TrackPrefab;
 
+    AlchemyManager alchem;
+
     // Testing
     private void Start() {
         AddTrack();
         SpawnHero(0, Resources.Load<Hero>("ScriptableObjects/Heroes/Default"));
         SpawnMonster(0, Resources.Load<Monster>("ScriptableObjects/Monsters/Creature"));
+        alchem = FindObjectOfType<AlchemyManager>();
+    }
+
+    void Update() {
+        if (Input.GetKeyDown(KeyCode.Mouse0)) {
+            SpawnMonster(0, alchem.GetRandomMonster());
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse1)) {
+            SpawnHero(0, Resources.Load<Hero>("ScriptableObjects/Heroes/Default"));
+        }
     }
 
     public void AddTrack () {
