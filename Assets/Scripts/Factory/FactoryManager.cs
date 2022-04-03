@@ -55,7 +55,8 @@ namespace GameJam
 		public void SpawnIngredient()
 		{
 			Ingredient ingredient = GetNextIngredient();
-			GameObject prefab = ingredient.FallingPrefab; // todo
+			GameObject prefab = Resources.Load<GameObject>("Prefabs/Ingredients/" + ingredient.name);
+
 			Vector3 position = new Vector3(Random.Range(spawn_x_min, spawn_x_max), spawn_y);
 
 			Instantiate(prefab, position, prefab.transform.rotation, transform);
