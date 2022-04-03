@@ -12,8 +12,8 @@ public class AlchemyManager : MonoBehaviour
     public List<Monster> AllMonsters;
 
     private void Awake() {
-        AllIngredients.AddRange(Resources.LoadAll("ScriptableObjects/Ingredients").Cast<Ingredient>());
-        AllMonsters.AddRange(Resources.LoadAll("ScriptableObjects/Monsters").Cast<Monster>());
+		AllIngredients.AddRange(Resources.LoadAll<Ingredient>("ScriptableObjects/Ingredients"));
+		AllMonsters.AddRange(Resources.LoadAll<Monster>("ScriptableObjects/Monsters"));
     }
 
     // Returns null if recipe fizzles
