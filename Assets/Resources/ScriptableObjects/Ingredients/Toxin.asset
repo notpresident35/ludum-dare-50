@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Abbreviation: 84
   Frequency: 1
+  GravityModifier: 1
   FallingPrefab: {fileID: 0}
