@@ -16,9 +16,9 @@ namespace GameJam
 		private void Awake()
 		{
 			AllIngredients = new List<Ingredient>();
-			AllIngredients.AddRange(Resources.LoadAll("ScriptableObjects/Ingredients").Cast<Ingredient>());
+			AllIngredients.AddRange(Resources.LoadAll<Ingredient>("ScriptableObjects/Ingredients"));
 			AllMonsters = new List<Monster>();
-			AllMonsters.AddRange(Resources.LoadAll("ScriptableObjects/Monsters").Cast<Monster>());
+			AllMonsters.AddRange(Resources.LoadAll<Monster>("ScriptableObjects/Monsters"));
 		}
 
 		// Returns null if recipe fizzles
