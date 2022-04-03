@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,8 +17,9 @@ public class AlchemyManager : MonoBehaviour
 
     // Returns null if recipe fizzles
     public Monster GetMonster (string recipe) {
+        string sortedRecipe = SortString(recipe);
         foreach (Monster monster in AllMonsters) {
-            if (monster.Recipes.Contains(recipe)) {
+            if (monster.Recipes.Contains(sortedRecipe)) {
                 return monster;
             }
         }
@@ -55,4 +57,11 @@ public class AlchemyManager : MonoBehaviour
     /*private void Start() {
         print (GetMonster("MM"));
     }*/
+
+    static string SortString(string input)
+    {
+        char[] characters = input.ToCharArray();
+        Array.Sort(characters);
+        return new string(characters);
+    }
 }

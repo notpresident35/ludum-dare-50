@@ -6,5 +6,6 @@ using UnityEngine;
 public class Ingredient : ScriptableObject
 {
     public char Abbreviation;
+    public int Frequency;
     public GameObject FallingPrefab;
 }

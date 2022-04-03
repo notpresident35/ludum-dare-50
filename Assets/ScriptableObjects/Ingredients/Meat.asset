@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Meat
   m_EditorClassIdentifier: 
   Abbreviation: 77
+  Frequency: 10
   FallingPrefab: {fileID: 0}
