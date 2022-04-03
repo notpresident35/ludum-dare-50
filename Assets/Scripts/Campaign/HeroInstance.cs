@@ -14,21 +14,29 @@ namespace GameJam
 			health = entity.Health;
 		}
 
-		public override void TryMove(Transform potentialBlocker)
+		public override bool TryMove(Transform potentialBlocker)
 		{
-			Instanceable blockerInstance = potentialBlocker.GetComponent<Instanceable>();
-			float frontEdgeOfBlockingMonster = potentialBlocker.transform.position.y - blockerInstance.entity.Size;
-			float frontEdgeOfSelf = transform.position.y + entity.Size;
 			float amountToMove = entity.Speed * Time.deltaTime;
-			if (frontEdgeOfBlockingMonster >= frontEdgeOfSelf + amountToMove)
+
+			// Make sure hero isn't blocked, if there's a monster on the track
+			if (potentialBlocker != null)
 			{
-				transform.position += Vector3.up * amountToMove;
+				Instanceable blockerInstance = potentialBlocker.GetComponent<Instanceable>();
+				float frontEdgeOfBlockingMonster = potentialBlocker.transform.position.y - blockerInstance.entity.Size;
+				float frontEdgeOfSelf = transform.position.y + entity.Size;
+				if (frontEdgeOfBlockingMonster < frontEdgeOfSelf + amountToMove)
+				{
+					return false;
+				}
 			}
+
+			transform.position += Vector3.up * amountToMove;
+			return true;
 		}
 
-		public override void Attack(Health health)
+		public override bool Attack(Health health)
 		{
-			health.Damage(entity.Damage * Time.deltaTime);
+			return health.Damage(entity.Damage * Time.deltaTime);
 		}
 
 		public override void Die()

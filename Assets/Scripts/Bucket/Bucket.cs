@@ -41,7 +41,7 @@ namespace GameJam
 			body = GetComponent<Rigidbody2D>();
 			contents = new List<Ingredient>(MaxItems);
 		}
-		
+
 		public void Configure(int trackId)
 		{
 			this.trackId = trackId;
