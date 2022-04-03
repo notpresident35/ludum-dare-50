@@ -12,22 +12,23 @@ namespace GameJam
 
 		float musicIntensity = 0;
 		float slowingEffect;
-		List<AudioSource> musicSources;
+		List<MusicTrack> musicTracks;
 
 		private void Awake()
 		{
-			musicSources = new List<AudioSource>();
+			musicTracks = new List<MusicTrack>();
 			foreach (Transform child in transform)
 			{
-				musicSources.Add(child.GetComponent<AudioSource>());
+				musicTracks.Add(child.GetComponent<MusicTrack>());
 			}
 		}
 
-
 		public void SetMusicIntensity(float intensity)
 		{
-			musicIntensity = intensity;
-			// TODO: Implement!!
+			foreach (MusicTrack track in musicTracks)
+			{
+				track.SetEnabled(intensity);
+			}
 		}
 
 		public void SlowEffect()
