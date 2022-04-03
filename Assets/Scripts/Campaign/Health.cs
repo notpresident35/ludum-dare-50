@@ -11,7 +11,7 @@ namespace GameJam
 
 		public void Damage(float amount)
 		{
-			print(gameObject.name + " was attacked");
+			//print(gameObject.name + " was attacked");
 			health -= amount;
 			if (health <= 0)
 			{
@@ -26,7 +26,7 @@ namespace GameJam
 
 		public virtual void Die()
 		{
-
+			Destroy(gameObject);
 		}
 	}
 }
