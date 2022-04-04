@@ -129,6 +129,7 @@ namespace GameJam
 			UXHelper.TargetInteractable = null;
 			heldBucket.PickUp();
 			Debug.Log("Pickup " + heldBucket.name);
+			anim.SetBool("BucketHeld", true);
 		}
 
 		private void StateUse()
@@ -147,6 +148,7 @@ namespace GameJam
 				heldBucket.Throw();
 				heldBucket = null;
 				State = PlayerAvatarState.Walk;
+				anim.SetBool("BucketHeld", false);
 			}
 		}
 

@@ -14,6 +14,7 @@ namespace GameJam
 
 		public Transform MonsterSpawnpoint;
 		public Transform HeroSpawnpoint;
+		public Transform Nexus;
 
 		private void Awake()
 		{
@@ -36,6 +37,12 @@ namespace GameJam
 			if (!CurrentHero)
 			{
 				return;
+			}
+
+			// LOSS STATE
+			if (CurrentHero.transform.position.y >= Nexus.position.y)
+			{
+
 			}
 
 			/* 
