@@ -1183,10 +1183,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2852616423291067129, guid: 12c06eab99b0f6c4895c9dba322edec4, type: 3}
-      propertyPath: trackId
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3571376509942384170, guid: 12c06eab99b0f6c4895c9dba322edec4, type: 3}
       propertyPath: m_Name
       value: Bucket Bottom
