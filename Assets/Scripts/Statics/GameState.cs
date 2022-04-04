@@ -7,9 +7,7 @@ public class GameState : MonoBehaviour
 	public enum State
 	{
 		Menu,
-		Starting,
 		MainGame,
-		Dying,
 		GameOver,
 		Credits
 	}

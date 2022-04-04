@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace GameJam
 {
@@ -14,6 +15,9 @@ namespace GameJam
 
 		public Transform MonsterSpawnpoint;
 		public Transform HeroSpawnpoint;
+		public Transform Nexus;
+
+		public UnityEvent NexusReached;
 
 		private void Awake()
 		{
@@ -38,6 +42,12 @@ namespace GameJam
 				return;
 			}
 
+			// LOSS STATE
+			if (CurrentHero.transform.position.y >= Nexus.position.y && GameState.state == GameState.State.MainGame)
+			{
+				NexusReached?.Invoke();
+			}
+
 			/* 
 			HERO
 			*/
@@ -49,9 +59,15 @@ namespace GameJam
 
 			if (!CurrentHero.TryMove(CurrentMonsters[0]?.transform))
 			{
-				if (CurrentHero.Attack(CurrentMonsters[0]?.GetComponent<Health>()))
+				CurrentHero.AttackTimer += Time.deltaTime;
+				if (CurrentHero.AttackTimer > CurrentHero.entity.AttackDelay)
 				{
-					CurrentMonsters.RemoveAt(0);
+					if (CurrentHero.Attack(CurrentMonsters[0]?.GetComponent<Health>()))
+					{
+						CurrentHero.KillMovementTimer = CurrentHero.entity.KillMovementDelay;
+						CurrentMonsters.RemoveAt(0);
+					}
+					CurrentHero.AttackTimer = 0;
 				}
 			}
 
@@ -62,9 +78,14 @@ namespace GameJam
 			{
 				if (!CurrentMonsters[0].TryMove(CurrentHero?.transform))
 				{
-					if (CurrentMonsters[0].Attack(CurrentHero?.GetComponent<Health>()))
+					CurrentHero.AttackTimer += Time.deltaTime;
+					if (CurrentHero.AttackTimer > CurrentHero.entity.AttackDelay)
 					{
-						CurrentHero = null;
+						if (CurrentMonsters[0].Attack(CurrentHero?.GetComponent<Health>()))
+						{
+							CurrentMonsters[0].KillMovementTimer = CurrentMonsters[0].entity.KillMovementDelay;
+							CurrentHero = null;
+						}
 					}
 				}
 			}

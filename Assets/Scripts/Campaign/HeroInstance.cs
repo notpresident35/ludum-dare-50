@@ -16,6 +16,13 @@ namespace GameJam
 
 		public override bool TryMove(Transform potentialBlocker)
 		{
+			// If just killed something, wait for cooldown
+			if (KillMovementTimer > 0)
+			{
+				KillMovementTimer -= Time.deltaTime;
+				return false;
+			}
+
 			float amountToMove = entity.Speed * Time.deltaTime;
 
 			// Make sure hero isn't blocked, if there's a monster on the track
@@ -36,7 +43,7 @@ namespace GameJam
 
 		public override bool Attack(Health health)
 		{
-			return health.Damage(entity.Damage * Time.deltaTime);
+			return health.Damage(entity.Damage);
 		}
 
 		public override void Die()

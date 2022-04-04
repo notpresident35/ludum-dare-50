@@ -335,6 +335,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  BucketPrefab: {fileID: 3571376509942384170, guid: 12c06eab99b0f6c4895c9dba322edec4, type: 3}
 --- !u!1 &6568133162484816863
 GameObject:
   m_ObjectHideFlags: 0

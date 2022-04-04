@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace GameJam
 {
 	public class CampaignManager : MonoBehaviour
 	{
+
+		public Transform TrackSpawnpoint;
 		public List<Track> Tracks;
 
 		[Header("Prefabs")]
@@ -13,17 +16,24 @@ namespace GameJam
 		public GameObject MonsterPrefab;
 		public GameObject TrackPrefab;
 
-		// Testing
-		private void Start()
+		public UnityEvent CampaignFailed;
+
+		Hero[] heroPool;
+
+		private void Awake()
 		{
-			AddTrack();
-			SpawnHero(0, Resources.Load<Hero>("ScriptableObjects/Heroes/Default"));
+			heroPool = Resources.LoadAll<Hero>("ScriptableObjects/Heroes");
 		}
 
-		public void AddTrack()
+		// Returns new track ID
+		public int AddTrack()
 		{
-			Track newTrack = Instantiate(TrackPrefab, Vector3.zero, Quaternion.identity, transform).GetComponent<Track>();
+			Track newTrack = Instantiate(TrackPrefab, TrackSpawnpoint.position, Quaternion.identity, transform).GetComponent<Track>();
 			Tracks.Add(newTrack);
+
+			newTrack.NexusReached.AddListener(FailCampaign);
+
+			return Tracks.IndexOf(newTrack);
 		}
 
 		public void SpawnHero(int trackID, Hero hero)
@@ -45,6 +55,11 @@ namespace GameJam
 			print("Spawned Hero: " + newHero.name);
 		}
 
+		public void SpawnRandomHero(int trackID)
+		{
+			SpawnHero(trackID, heroPool[Random.Range(0, heroPool.Length)]);
+		}
+
 		public void SpawnMonster(int trackID, Monster monster)
 		{
 			if (trackID == -1)
@@ -63,6 +78,11 @@ namespace GameJam
 			newMonster.Spawn();
 			Tracks[trackID].AttachMonster(newMonster);
 			print("Spawned Monster: " + newMonster.name);
+		}
+
+		public void FailCampaign()
+		{
+			CampaignFailed?.Invoke();
 		}
 	}
 }
