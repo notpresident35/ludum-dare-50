@@ -9,14 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2470373656623035919}
-  - component: {fileID: 2651342810233614531}
-  m_Layer: 10
+  - component: {fileID: 1074948871}
+  m_Layer: 0
   m_Name: Interact Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2470373656623035919
 Transform:
   m_ObjectHideFlags: 0
@@ -31,8 +31,8 @@ Transform:
   m_Father: {fileID: 8133356679259552872}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &2651342810233614531
-BoxCollider2D:
+--- !u!58 &1074948871
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -44,19 +44,9 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.46052393}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0, y: 0.39}
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.9826217}
-  m_EdgeRadius: 0
+  m_Radius: 0.5
 --- !u!1 &8133356679259552854
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,7 +101,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -212,3 +202,8 @@ MonoBehaviour:
     elapsed: 0
   _state: 0
   curVel: {x: 0, y: 0}
+  heldObject: {fileID: 0}
+  interactArea: {fileID: 1074948871}
+  interactMask:
+    serializedVersion: 2
+    m_Bits: 2048

@@ -7,33 +7,36 @@ namespace GameJam
 {
 	public class HeroInstance : Instanceable
 	{
-		public Hero hero;
 
 		public override void Spawn()
 		{
-			transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = hero.sprite;
-			health = hero.Health;
+			transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = entity.sprite;
+			health = entity.Health;
 		}
 
-		public override void Move()
+		public override bool TryMove(Transform potentialBlocker)
 		{
-			Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, hero.Size, hero.FriendlyMask);
+			float amountToMove = entity.Speed * Time.deltaTime;
 
-			if (!cols.Any(x => x.gameObject != gameObject))
+			// Make sure hero isn't blocked, if there's a monster on the track
+			if (potentialBlocker != null)
 			{
-				transform.position += Vector3.up * hero.Speed * Time.deltaTime;
+				Instanceable blockerInstance = potentialBlocker.GetComponent<Instanceable>();
+				float frontEdgeOfBlockingMonster = potentialBlocker.transform.position.y - blockerInstance.entity.Size;
+				float frontEdgeOfSelf = transform.position.y + entity.Size;
+				if (frontEdgeOfBlockingMonster < frontEdgeOfSelf + amountToMove)
+				{
+					return false;
+				}
 			}
+
+			transform.position += Vector3.up * amountToMove;
+			return true;
 		}
 
-		public override bool Attack()
+		public override bool Attack(Health health)
 		{
-			Collider2D col = Physics2D.OverlapCircle(transform.position, hero.Size * 1.25f, hero.AttackMask);
-			if (col != null && col.transform.GetComponent<Health>())
-			{
-				col.transform.GetComponent<Health>().Damage(hero.Damage * Time.deltaTime);
-				return true;
-			}
-			return false;
+			return health.Damage(entity.Damage * Time.deltaTime);
 		}
 
 		public override void Die()

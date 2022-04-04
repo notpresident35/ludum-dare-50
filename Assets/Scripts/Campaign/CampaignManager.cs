@@ -13,27 +13,11 @@ namespace GameJam
 		public GameObject MonsterPrefab;
 		public GameObject TrackPrefab;
 
-		AlchemyManager alchem;
-
 		// Testing
 		private void Start()
 		{
 			AddTrack();
 			SpawnHero(0, Resources.Load<Hero>("ScriptableObjects/Heroes/Default"));
-			SpawnMonster(0, Resources.Load<Monster>("ScriptableObjects/Monsters/Creature"));
-			alchem = FindObjectOfType<AlchemyManager>();
-		}
-
-		void Update()
-		{
-			if (Input.GetMouseButtonDown(0))
-			{
-				SpawnMonster(0, alchem.GetRandomMonster());
-			}
-			if (Input.GetMouseButtonDown(1))
-			{
-				SpawnHero(0, Resources.Load<Hero>("ScriptableObjects/Heroes/Default"));
-			}
 		}
 
 		public void AddTrack()
@@ -44,19 +28,41 @@ namespace GameJam
 
 		public void SpawnHero(int trackID, Hero hero)
 		{
+			if (trackID == -1)
+			{
+				Debug.LogError("Tried to spawn hero with invalid track id!");
+				return;
+			}
+			if (hero == null)
+			{
+				Debug.Log("Did not spawn hero - reference was null");
+				return;
+			}
 			HeroInstance newHero = Instantiate(HeroPrefab, Tracks[trackID].HeroSpawnpoint.position, Quaternion.identity, Tracks[trackID].transform).GetComponent<HeroInstance>();
-			newHero.hero = hero;
+			newHero.entity = hero;
 			newHero.Spawn();
 			Tracks[trackID].AttachHero(newHero);
+			print("Spawned Hero: " + newHero.name);
 		}
 
 		public void SpawnMonster(int trackID, Monster monster)
 		{
+			if (trackID == -1)
+			{
+				Debug.LogError("Tried to spawn monster with invalid track id!");
+				return;
+			}
+			if (monster == null)
+			{
+				Debug.Log("Did not spawn monster - reference was null");
+				return;
+			}
 			MonsterInstance newMonster = Instantiate(MonsterPrefab, Tracks[trackID].MonsterSpawnpoint.position, Quaternion.identity, Tracks[trackID].transform).GetComponent<MonsterInstance>();
 			newMonster.transform.parent = Tracks[trackID].transform;
-			newMonster.monster = monster;
+			newMonster.entity = monster;
 			newMonster.Spawn();
 			Tracks[trackID].AttachMonster(newMonster);
+			print("Spawned Monster: " + newMonster.name);
 		}
 	}
 }

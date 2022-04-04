@@ -9,14 +9,17 @@ namespace GameJam
 
 		public float health;
 
-		public void Damage(float amount)
+		// Returns true if killed by damage
+		public bool Damage(float amount)
 		{
-			print(gameObject.name + " was attacked");
+			//print(gameObject.name + " was attacked");
 			health -= amount;
 			if (health <= 0)
 			{
 				Die();
+				return true;
 			}
+			return false;
 		}
 
 		public void Heal(float amount)
@@ -26,7 +29,7 @@ namespace GameJam
 
 		public virtual void Die()
 		{
-
+			Destroy(gameObject);
 		}
 	}
 }

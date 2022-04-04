@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &185403059
 Transform:
   m_ObjectHideFlags: 0
@@ -44,7 +44,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.2132588}
+  m_Offset: {x: 0, y: 0.20022506}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -55,7 +55,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.75786155, y: 0.54816496}
+  m_Size: {x: 0.4960944, y: 0.45258462}
   m_EdgeRadius: 0
 --- !u!1 &3571376509942384170
 GameObject:
@@ -111,7 +111,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -209,3 +209,6 @@ MonoBehaviour:
   stateChanged:
     m_PersistentCalls:
       m_Calls: []
+  PickupSFX: {fileID: 8300000, guid: 5821c7cc2f73b5e4595451e598ca0a37, type: 3}
+  ThrowSFX: {fileID: 8300000, guid: 004ea8c8bf2aa3a41b27f07c0f47ed7c, type: 3}
+  GetIngredientSFX: {fileID: 8300000, guid: a7f05622f58bc5340a1ae15ae12fbf45, type: 3}

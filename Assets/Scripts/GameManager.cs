@@ -10,18 +10,19 @@ namespace GameJam
 		public AnimationCurve IntensityCurve;
 
 		private AudioManager audioManager;
+		private FactoryManager factoryManager;
 
-		// Start is called before the first frame update
 		void Awake()
 		{
 			audioManager = GameObject.FindObjectOfType<AudioManager>();
+			factoryManager = GameObject.FindObjectOfType<FactoryManager>();
 		}
-
-		// Update is called once per frame
 
 		void Update()
 		{
-			audioManager.SetMusicIntensity(IntensityCurve.Evaluate(Time.time));
+			float intensity = IntensityCurve.Evaluate(Mathf.Min(Time.time, IntensityCurve.keys[IntensityCurve.length - 1].time));
+			audioManager.SetMusicIntensity(intensity);
+			factoryManager.SetSpawnIntensity(intensity);
 		}
 	}
 }

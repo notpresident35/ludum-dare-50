@@ -10,5 +10,9 @@ namespace GameJam
 		[Header("Walk")]
 		public float walkHorzMax = 8;
 		public float walkHorzAccel = 50;
+
+		[Header("Bucket")]
+		public float sameYTolerance = 0.05f;
+		public GameObject assembleEffects;
 	}
 }

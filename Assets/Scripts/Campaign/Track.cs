@@ -15,57 +15,70 @@ namespace GameJam
 		public Transform MonsterSpawnpoint;
 		public Transform HeroSpawnpoint;
 
+		private void Awake()
+		{
+			CurrentMonsters = new List<MonsterInstance>();
+		}
+
 		public void AttachHero(HeroInstance hero)
 		{
 			CurrentHero = hero;
-			hero.track = this;
 		}
 
 		public void AttachMonster(MonsterInstance monster)
 		{
 			CurrentMonsters.Add(monster);
-			monster.track = this;
 		}
 
 		void Update()
 		{
+			// Monsters will wait around until a new hero appears if a hero dies
 			if (!CurrentHero)
 			{
 				return;
 			}
 
-			if (!CurrentHero.Attack())
+			/* 
+			HERO
+			*/
+			if (CurrentMonsters.Count < 1)
 			{
-				CurrentHero.Move();
+				CurrentHero.TryMove(null);
+				return;
 			}
 
-			foreach (MonsterInstance monster in CurrentMonsters)
+			if (!CurrentHero.TryMove(CurrentMonsters[0]?.transform))
 			{
-				if (monster == null)
+				if (CurrentHero.Attack(CurrentMonsters[0]?.GetComponent<Health>()))
 				{
-					return;
-				}
-
-				if (!monster.Attack())
-				{
-
-					monster.Move();
+					CurrentMonsters.RemoveAt(0);
 				}
 			}
 
-			CleanMonsterList();
-		}
-
-		void CleanMonsterList()
-		{
-			for (int i = CurrentMonsters.Count; i < 0; i--)
+			/* 
+			FIRST MONSTER
+			*/
+			if (CurrentMonsters.Count > 0 && CurrentMonsters[0] != null)
 			{
-				if (CurrentMonsters[i] == null)
+				if (!CurrentMonsters[0].TryMove(CurrentHero?.transform))
 				{
-					CurrentMonsters.RemoveAt(i);
+					if (CurrentMonsters[0].Attack(CurrentHero?.GetComponent<Health>()))
+					{
+						CurrentHero = null;
+					}
 				}
 			}
 
+			/* 
+			ALL OTHER MONSTERS
+			*/
+			if (CurrentMonsters.Count > 1)
+			{
+				for (int i = 1; i < CurrentMonsters.Count; i++)
+				{
+					CurrentMonsters[i]?.TryMove(CurrentMonsters[i - 1]?.transform);
+				}
+			}
 		}
 	}
 }
