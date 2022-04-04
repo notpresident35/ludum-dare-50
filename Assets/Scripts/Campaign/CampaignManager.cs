@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace GameJam
 {
@@ -15,6 +16,8 @@ namespace GameJam
 		public GameObject MonsterPrefab;
 		public GameObject TrackPrefab;
 
+		public UnityEvent CampaignFailed;
+
 		Hero[] heroPool;
 
 		private void Awake()
@@ -27,6 +30,9 @@ namespace GameJam
 		{
 			Track newTrack = Instantiate(TrackPrefab, TrackSpawnpoint.position, Quaternion.identity, transform).GetComponent<Track>();
 			Tracks.Add(newTrack);
+
+			newTrack.NexusReached.AddListener(FailCampaign);
+
 			return Tracks.IndexOf(newTrack);
 		}
 
@@ -72,6 +78,11 @@ namespace GameJam
 			newMonster.Spawn();
 			Tracks[trackID].AttachMonster(newMonster);
 			print("Spawned Monster: " + newMonster.name);
+		}
+
+		public void FailCampaign()
+		{
+			CampaignFailed?.Invoke();
 		}
 	}
 }

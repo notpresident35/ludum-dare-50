@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace GameJam
 {
@@ -15,6 +16,8 @@ namespace GameJam
 		public Transform MonsterSpawnpoint;
 		public Transform HeroSpawnpoint;
 		public Transform Nexus;
+
+		public UnityEvent NexusReached;
 
 		private void Awake()
 		{
@@ -40,9 +43,9 @@ namespace GameJam
 			}
 
 			// LOSS STATE
-			if (CurrentHero.transform.position.y >= Nexus.position.y)
+			if (CurrentHero.transform.position.y >= Nexus.position.y && GameState.state == GameState.State.MainGame)
 			{
-
+				NexusReached?.Invoke();
 			}
 
 			/* 

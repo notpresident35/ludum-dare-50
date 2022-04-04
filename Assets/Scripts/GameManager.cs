@@ -20,11 +20,15 @@ namespace GameJam
 			audioManager = GameObject.FindObjectOfType<AudioManager>();
 			factoryManager = GameObject.FindObjectOfType<FactoryManager>();
 			campaignManager = GameObject.FindObjectOfType<CampaignManager>();
+			GameState.state = GameState.State.MainGame;
 		}
 
-		// TODO: Remove, this is only for testing
+
 		void Start()
 		{
+			campaignManager.CampaignFailed.AddListener(GameOver);
+
+			// TODO: Replace with tutorial
 			SpawnTrack();
 		}
 
@@ -48,6 +52,12 @@ namespace GameJam
 			bucketUi.Bind(bucket)
 
 			*/
+		}
+
+		public void GameOver()
+		{
+			print("GAME OVER");
+			GameState.state = GameState.State.GameOver;
 		}
 	}
 }
