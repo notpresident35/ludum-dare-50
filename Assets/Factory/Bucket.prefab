@@ -209,3 +209,6 @@ MonoBehaviour:
   stateChanged:
     m_PersistentCalls:
       m_Calls: []
+  PickupSFX: {fileID: 8300000, guid: 5821c7cc2f73b5e4595451e598ca0a37, type: 3}
+  ThrowSFX: {fileID: 8300000, guid: 004ea8c8bf2aa3a41b27f07c0f47ed7c, type: 3}
+  GetIngredientSFX: {fileID: 8300000, guid: a7f05622f58bc5340a1ae15ae12fbf45, type: 3}

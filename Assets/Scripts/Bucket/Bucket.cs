@@ -34,6 +34,12 @@ namespace GameJam
 		/// </summary>
 		public UnityEvent stateChanged;
 
+		[Header("SFX")]
+		public AudioClip PickupSFX;
+		public AudioClip ThrowSFX;
+		public AudioClip GetIngredientSFX;
+
+
 		private Rigidbody2D body;
 
 		private void Awake()
@@ -51,6 +57,7 @@ namespace GameJam
 		public void PickUp()
 		{
 			isHeld = true;
+			AudioManager.Instance.PlaySoundEffect(PickupSFX);
 			stateChanged.Invoke();
 		}
 
@@ -58,6 +65,7 @@ namespace GameJam
 		{
 			body.velocity = new Vector2(0, throwVel);
 			isHeld = false;
+			AudioManager.Instance.PlaySoundEffect(ThrowSFX);
 			stateChanged.Invoke();
 		}
 
@@ -73,6 +81,7 @@ namespace GameJam
 			if (fallObj != null && contents.Count < MaxItems)
 			{
 				contents.Add(fallObj.ingredient);
+				AudioManager.Instance.PlaySoundEffect(GetIngredientSFX);
 				stateChanged.Invoke();
 
 				fallObj.Collect();
