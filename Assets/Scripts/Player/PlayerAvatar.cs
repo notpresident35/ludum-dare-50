@@ -29,6 +29,8 @@ namespace GameJam
 		public Transform bucketRoot;
 		public Transform throwRoot;
 
+		public AudioClip SummonSFX;
+
 		private Rigidbody2D body;
 		private SpriteRenderer spriteRen;
 		private Animator anim;
@@ -197,6 +199,11 @@ namespace GameJam
 
 			var effects = monster == null ? config.assembleEffectFail : config.assembleEffectSuccess;
 			Instantiate(effects, transform.position, transform.rotation);
+
+			if (monster != null)
+			{
+				AudioManager.Instance.PlaySoundEffect(SummonSFX);
+			}
 		}
 
 		// =========================================================

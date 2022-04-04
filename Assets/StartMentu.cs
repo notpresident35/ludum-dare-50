@@ -7,7 +7,7 @@ public class StartMentu : MonoBehaviour
 {
 	public void loadMainscene()
 	{
-		SceneManager.LoadScene("Main");
+		SceneManager.LoadScene("Bryan");
 	}
 	public void quitGame()
 	{

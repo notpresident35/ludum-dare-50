@@ -65,7 +65,7 @@ namespace GameJam
 		IEnumerator RestartGame()
 		{
 			yield return new WaitForSeconds(5);
-			UnityEngine.SceneManagement.SceneManager.LoadScene("Main");
+			UnityEngine.SceneManagement.SceneManager.LoadScene("Bryan");
 		}
 	}
 }

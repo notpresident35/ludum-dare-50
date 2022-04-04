@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Track1
   m_EditorClassIdentifier: 
   Ranges:
-  - min: 0.2
-    max: 0.5
+  - min: 0.5
+    max: 0.7
