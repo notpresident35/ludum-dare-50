@@ -23,6 +23,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -2716938532715670413, guid: a602c4f65e27d3d4aa6d877f44550c2d, type: 3}
+    - target: {fileID: 8865805816478105819, guid: b194d454fd5bf9042ad3340e884c80b1, type: 3}
+      propertyPath: m_Color.b
+      value: 0.764151
+      objectReference: {fileID: 0}
+    - target: {fileID: 8865805816478105819, guid: b194d454fd5bf9042ad3340e884c80b1, type: 3}
+      propertyPath: m_Color.g
+      value: 0.62357605
+      objectReference: {fileID: 0}
+    - target: {fileID: 8865805816478105819, guid: b194d454fd5bf9042ad3340e884c80b1, type: 3}
+      propertyPath: m_Color.r
+      value: 0.70559675
+      objectReference: {fileID: 0}
     - target: {fileID: 8865805816491888430, guid: b194d454fd5bf9042ad3340e884c80b1, type: 3}
       propertyPath: m_Name
       value: Fire

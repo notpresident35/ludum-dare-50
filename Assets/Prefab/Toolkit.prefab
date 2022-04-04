@@ -340,6 +340,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   BucketPrefab: {fileID: 3571376509942384170, guid: 12c06eab99b0f6c4895c9dba322edec4, type: 3}
+  BucketUXPrefab: {fileID: 7792196464311376573, guid: dea89af87a56fc741a395a0ec0734a71, type: 3}
+  GameOverUI: {fileID: 0}
 --- !u!1 &6568133162484816863
 GameObject:
   m_ObjectHideFlags: 0

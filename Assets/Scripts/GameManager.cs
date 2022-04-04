@@ -10,6 +10,7 @@ namespace GameJam
 		public AnimationCurve IntensityCurve;
 
 		public GameObject BucketPrefab;
+		public GameObject BucketUXPrefab;
 		public GameObject GameOverUI;
 
 		private AudioManager audioManager;
@@ -45,14 +46,12 @@ namespace GameJam
 			int trackID = campaignManager.AddTrack();
 			campaignManager.SpawnRandomHero(trackID);
 
-			GameObject newBucket = Instantiate(BucketPrefab, factoryManager.transform.position, Quaternion.identity, factoryManager.transform);
-			newBucket.GetComponent<Bucket>().Configure(trackID);
-			// TODO:
-			/*
-			var bucketUi Instantiate(BucketUI)
-			bucketUi.Bind(bucket)
+			Bucket newBucket = Instantiate(BucketPrefab, factoryManager.transform.position, Quaternion.identity, factoryManager.transform).GetComponent<Bucket>();
+			newBucket.Configure(trackID);
 
-			*/
+			BucketUX newBucketUX = Instantiate(BucketUXPrefab, factoryManager.transform.position, Quaternion.identity, factoryManager.transform).GetComponent<BucketUX>();
+			newBucketUX.BindBucket(newBucket);
+			newBucketUX.Spawn();
 		}
 
 		public void GameOver()
