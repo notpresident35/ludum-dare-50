@@ -22,9 +22,12 @@ namespace GameJam
 		[SerializeField] private PlayerAvatarState _state;
 		public Vector2 curVel;
 		public Bucket heldBucket;
+		public bool facingRight;
 
 		public CircleCollider2D interactArea;
 		public LayerMask interactMask;
+		public Transform bucketRoot;
+		public Transform throwRoot;
 
 		private Rigidbody2D body;
 		private SpriteRenderer spriteRen;
@@ -62,6 +65,7 @@ namespace GameJam
 			State = PlayerAvatarState.Walk;
 			curVel = Vector2.zero;
 			inputUseBuffer.Stop();
+			facingRight = true;
 		}
 
 		// =========================================================
@@ -126,7 +130,9 @@ namespace GameJam
 			heldBucket = UXHelper.TargetInteractable.GetComponent<Bucket>();
 			UXHelper.TargetInteractable = null;
 			heldBucket.PickUp();
-			Debug.Log("Pickup " + heldBucket.name);
+
+			heldBucket.transform.parent = bucketRoot;
+			heldBucket.transform.localPosition = Vector3.zero;
 		}
 
 		private void StateUse()
@@ -142,8 +148,12 @@ namespace GameJam
 			if (inputUseBuffer.Running)
 			{
 				inputUseBuffer.Stop();
-				heldBucket.Throw();
+
+				heldBucket.transform.parent = null;
+				heldBucket.transform.position = bucketRoot.position + new Vector3(throwRoot.localPosition.x * (facingRight ? 1 : -1), 0, 0);
+				heldBucket.Throw(body.velocity);
 				heldBucket = null;
+
 				State = PlayerAvatarState.Walk;
 			}
 		}
@@ -167,6 +177,7 @@ namespace GameJam
 
 			if (horz != 0)
 			{
+				facingRight = horz > 0;
 				spriteRen.flipX = horz < 0;
 			}
 		}
@@ -176,12 +187,11 @@ namespace GameJam
 			var ingredients = new List<Ingredient>(heldBucket.contents);
 			heldBucket.ClearContents();
 
-			Debug.Log("Contents: " + string.Join(", ", ingredients));
-			// TODO: If null, fancy stuff (recipe fizzles)
 			var monster = FindObjectOfType<AlchemyManager>().GetMonster(ingredients);
 			FindObjectOfType<CampaignManager>().SpawnMonster(heldBucket.trackId, monster);
 
-			Instantiate(config.assembleEffects, transform.position, transform.rotation);
+			var effects = monster == null ? config.assembleEffectFail : config.assembleEffectSuccess;
+			Instantiate(effects, transform.position, transform.rotation);
 		}
 
 		// =========================================================
@@ -203,7 +213,8 @@ namespace GameJam
 				return;
 			}
 
-			Vector2 circleCenter = (Vector2)interactArea.transform.position + interactArea.offset;
+			Vector2 offset = new Vector2(interactArea.offset.x * (facingRight ? 1 : -1), interactArea.offset.y);
+			Vector2 circleCenter = (Vector2)interactArea.transform.position + offset;
 			var list = Physics2D.OverlapCircleAll(circleCenter, interactArea.radius, interactMask)
 				.Where(x => x.GetComponent<Bucket>() != null);
 

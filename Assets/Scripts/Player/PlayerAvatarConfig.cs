@@ -13,6 +13,7 @@ namespace GameJam
 
 		[Header("Bucket")]
 		public float sameYTolerance = 0.05f;
-		public GameObject assembleEffects;
+		public GameObject assembleEffectSuccess;
+		public GameObject assembleEffectFail;
 	}
 }
