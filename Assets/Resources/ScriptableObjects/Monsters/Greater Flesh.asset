@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a42864dfd1e299c40aee0affcd17fe80, type: 3}
   m_Name: Greater Flesh
   m_EditorClassIdentifier: 
-  Health: 20
-  Damage: 1
+  Health: 30
+  Damage: 0
   AttackDelay: 1
   KillMovementDelay: 0
-  Size: 0.5
-  Speed: 0.5
+  Size: 0.2
+  Speed: 0.2
   sprite: {fileID: 21300000, guid: e033107f66b8af5499fe685d43a64945, type: 3}
   AttackMask:
     serializedVersion: 2

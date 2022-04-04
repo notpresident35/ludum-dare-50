@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a42864dfd1e299c40aee0affcd17fe80, type: 3}
   m_Name: Zombie
   m_EditorClassIdentifier: 
-  Health: 20
-  Damage: 1
+  Health: 15
+  Damage: 0
   AttackDelay: 1
   KillMovementDelay: 0
-  Size: 0.5
+  Size: 0.2
   Speed: 0.5
   sprite: {fileID: 21300000, guid: 27541616b267b6d4f9def3eac8fa55c6, type: 3}
   AttackMask:
@@ -32,6 +32,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ee6c5b7bc130c2046add874bcf14dea8, type: 3}
   DeathSFX: {fileID: 8300000, guid: 95a16b37c94a07d479d7378709e1e8d1, type: 3}
   Recipes:
-  - MB
-  - MMB
-  - MBB
+  - BM
+  - BBM
+  - BMM

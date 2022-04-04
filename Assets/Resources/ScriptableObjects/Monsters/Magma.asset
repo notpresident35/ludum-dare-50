@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Magma
   m_EditorClassIdentifier: 
   Health: 20
-  Damage: 1
+  Damage: 0
   AttackDelay: 1
   KillMovementDelay: 0
-  Size: 0.5
+  Size: 0.2
   Speed: 0.5
   sprite: {fileID: 21300000, guid: d98649218469ce44894929627a4b8f1f, type: 3}
   AttackMask:
@@ -32,6 +32,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ee6c5b7bc130c2046add874bcf14dea8, type: 3}
   DeathSFX: {fileID: 8300000, guid: 95a16b37c94a07d479d7378709e1e8d1, type: 3}
   Recipes:
-  - SF
-  - SSF
-  - SFF
+  - FS
+  - FFS
+  - FSS

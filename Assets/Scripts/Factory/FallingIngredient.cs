@@ -46,4 +46,9 @@ public class FallingIngredient : MonoBehaviour
 		}
 #endif
 	}
+
+	void Update()
+	{
+		rb.angularVelocity = Random.Range(-10f, 10f);
+	}
 }

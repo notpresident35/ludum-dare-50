@@ -43,10 +43,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08b712b08b68bf643b174c2bb42da044, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TrackSpawnpoint: {fileID: 0}
   Tracks: []
   HeroPrefab: {fileID: 9043634219152188721, guid: 40acf58dfebe377409641c5fda561d2c, type: 3}
   MonsterPrefab: {fileID: 6248991700199925314, guid: 94bc1e06853852048a1d0e0210076f82, type: 3}
   TrackPrefab: {fileID: 661752374674333911, guid: f773479f667bde74081748d148dc3ce7, type: 3}
+  CampaignFailed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3454732841460733680
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,6 +340,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   BucketPrefab: {fileID: 3571376509942384170, guid: 12c06eab99b0f6c4895c9dba322edec4, type: 3}
+  BucketUXPrefab: {fileID: 7792196464311376573, guid: dea89af87a56fc741a395a0ec0734a71, type: 3}
+  GameOverUI: {fileID: 0}
 --- !u!1 &6568133162484816863
 GameObject:
   m_ObjectHideFlags: 0

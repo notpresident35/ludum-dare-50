@@ -80,7 +80,7 @@ namespace GameJam
 			{
 				return string.Empty;
 			}
-			string output = string.Join("", ingredients.Select(x => x.Abbreviation));
+			string output = string.Join("", ingredients.Select(x => x.Abbreviation).OrderBy(x => x));
 			Debug.Log($"AbbrStr: `{output}`");
 			return output;
 		}
