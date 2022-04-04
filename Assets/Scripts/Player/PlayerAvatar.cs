@@ -31,6 +31,7 @@ namespace GameJam
 
 		private Rigidbody2D body;
 		private SpriteRenderer spriteRen;
+		private Animator anim;
 
 		// =========================================================
 		// Properties
@@ -57,6 +58,7 @@ namespace GameJam
 		{
 			body = GetComponent<Rigidbody2D>();
 			spriteRen = GetComponent<SpriteRenderer>();
+			anim = GetComponent<Animator>();
 		}
 
 		private void Start()
@@ -131,6 +133,7 @@ namespace GameJam
 			UXHelper.TargetInteractable = null;
 			heldBucket.PickUp();
 
+			anim.SetBool("BucketHeld", true);
 			heldBucket.transform.parent = bucketRoot;
 			heldBucket.transform.localPosition = Vector3.zero;
 		}
@@ -155,6 +158,7 @@ namespace GameJam
 				heldBucket = null;
 
 				State = PlayerAvatarState.Walk;
+				anim.SetBool("BucketHeld", false);
 			}
 		}
 
@@ -180,6 +184,7 @@ namespace GameJam
 				facingRight = horz > 0;
 				spriteRen.flipX = horz < 0;
 			}
+			anim.SetFloat("MovementSpeed", horz);
 		}
 
 		private void Assemble()
