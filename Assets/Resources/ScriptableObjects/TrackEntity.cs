@@ -8,7 +8,7 @@ public abstract class TrackEntity : ScriptableObject
 	public float Health;
 	public float Damage;
 	public float AttackDelay;
-	public float AttackTimer;
+	public float KillMovementDelay;
 	public float Size;
 	public float Speed;
 	public Sprite sprite;

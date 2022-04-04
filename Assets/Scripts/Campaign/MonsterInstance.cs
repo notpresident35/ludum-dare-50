@@ -35,7 +35,7 @@ namespace GameJam
 
 		public override bool Attack(Health health)
 		{
-			bool killed = health.Damage(entity.Damage * Time.deltaTime);
+			bool killed = health.Damage(entity.Damage);
 			if (killed)
 			{
 				AudioManager.Instance.PlaySoundEffect(health.GetComponent<Instanceable>().entity.DeathSFX);

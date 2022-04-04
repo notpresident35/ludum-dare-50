@@ -7,6 +7,8 @@ namespace GameJam
 	public abstract class Instanceable : Health
 	{
 		public TrackEntity entity;
+		public float AttackTimer;
+		public float KillMovementTimer;
 		public abstract void Spawn();
 		// Returns true if movement was not blocked
 		public abstract bool TryMove(Transform potentialBlocker);

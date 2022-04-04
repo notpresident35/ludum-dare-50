@@ -28,6 +28,7 @@ namespace GameJam
 
 		private Rigidbody2D body;
 		private SpriteRenderer spriteRen;
+		private Animator anim;
 
 		// =========================================================
 		// Properties
@@ -54,6 +55,7 @@ namespace GameJam
 		{
 			body = GetComponent<Rigidbody2D>();
 			spriteRen = GetComponent<SpriteRenderer>();
+			anim = GetComponent<Animator>();
 		}
 
 		private void Start()
@@ -169,6 +171,7 @@ namespace GameJam
 			{
 				spriteRen.flipX = horz < 0;
 			}
+			anim.SetFloat("MovementSpeed", horz);
 		}
 
 		private void Assemble()

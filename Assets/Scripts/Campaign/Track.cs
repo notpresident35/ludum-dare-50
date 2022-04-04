@@ -49,14 +49,15 @@ namespace GameJam
 
 			if (!CurrentHero.TryMove(CurrentMonsters[0]?.transform))
 			{
-				CurrentHero.entity.AttackTimer += Time.deltaTime;
-				if (CurrentHero.entity.AttackTimer > CurrentHero.entity.AttackDelay)
+				CurrentHero.AttackTimer += Time.deltaTime;
+				if (CurrentHero.AttackTimer > CurrentHero.entity.AttackDelay)
 				{
 					if (CurrentHero.Attack(CurrentMonsters[0]?.GetComponent<Health>()))
 					{
+						CurrentHero.KillMovementTimer = CurrentHero.entity.KillMovementDelay;
 						CurrentMonsters.RemoveAt(0);
 					}
-					CurrentHero.entity.AttackTimer = 0;
+					CurrentHero.AttackTimer = 0;
 				}
 			}
 
@@ -67,11 +68,12 @@ namespace GameJam
 			{
 				if (!CurrentMonsters[0].TryMove(CurrentHero?.transform))
 				{
-					CurrentHero.entity.AttackTimer += Time.deltaTime;
-					if (CurrentHero.entity.AttackTimer > CurrentHero.entity.AttackDelay)
+					CurrentHero.AttackTimer += Time.deltaTime;
+					if (CurrentHero.AttackTimer > CurrentHero.entity.AttackDelay)
 					{
 						if (CurrentMonsters[0].Attack(CurrentHero?.GetComponent<Health>()))
 						{
+							CurrentMonsters[0].KillMovementTimer = CurrentMonsters[0].entity.KillMovementDelay;
 							CurrentHero = null;
 						}
 					}

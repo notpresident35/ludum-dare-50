@@ -6,6 +6,8 @@ namespace GameJam
 {
 	public class CampaignManager : MonoBehaviour
 	{
+
+		public Transform TrackSpawnpoint;
 		public List<Track> Tracks;
 
 		[Header("Prefabs")]
@@ -13,17 +15,19 @@ namespace GameJam
 		public GameObject MonsterPrefab;
 		public GameObject TrackPrefab;
 
-		// Testing
-		private void Start()
+		Hero[] heroPool;
+
+		private void Awake()
 		{
-			AddTrack();
-			SpawnHero(0, Resources.Load<Hero>("ScriptableObjects/Heroes/Default"));
+			heroPool = Resources.LoadAll<Hero>("ScriptableObjects/Heroes");
 		}
 
-		public void AddTrack()
+		// Returns new track ID
+		public int AddTrack()
 		{
-			Track newTrack = Instantiate(TrackPrefab, Vector3.zero, Quaternion.identity, transform).GetComponent<Track>();
+			Track newTrack = Instantiate(TrackPrefab, TrackSpawnpoint.position, Quaternion.identity, transform).GetComponent<Track>();
 			Tracks.Add(newTrack);
+			return Tracks.IndexOf(newTrack);
 		}
 
 		public void SpawnHero(int trackID, Hero hero)
@@ -43,6 +47,11 @@ namespace GameJam
 			newHero.Spawn();
 			Tracks[trackID].AttachHero(newHero);
 			print("Spawned Hero: " + newHero.name);
+		}
+
+		public void SpawnRandomHero(int trackID)
+		{
+			SpawnHero(trackID, heroPool[Random.Range(0, heroPool.Length)]);
 		}
 
 		public void SpawnMonster(int trackID, Monster monster)
