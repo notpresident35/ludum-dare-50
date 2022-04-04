@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Meat
   m_EditorClassIdentifier: 
   Abbreviation: 77
-  Frequency: 10
-  GravityModifier: 1
+  Frequency: 4
+  GravityModifier: 2.5
   Icon: {fileID: 5229486228778498286, guid: a602c4f65e27d3d4aa6d877f44550c2d, type: 3}

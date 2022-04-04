@@ -46,6 +46,7 @@ namespace GameJam
 			if (CurrentHero.transform.position.y >= Nexus.position.y && GameState.state == GameState.State.MainGame)
 			{
 				NexusReached?.Invoke();
+				Destroy(CurrentHero.gameObject);
 			}
 
 			/* 

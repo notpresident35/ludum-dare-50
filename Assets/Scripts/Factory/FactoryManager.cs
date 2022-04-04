@@ -34,7 +34,9 @@ namespace GameJam
 		float spawn_y;
 
 		float spawnrate = 0;
-		float spawnTimer = 0;
+		float spawnTimer = 2;
+
+		bool hasBegun = false;
 
 		Dictionary<Ingredient, IngredientQueue> ingredientPools;
 
@@ -43,6 +45,11 @@ namespace GameJam
 			alchem = FindObjectOfType<AlchemyManager>();
 			IngredientBag = new List<Ingredient>();
 			ingredientPools = new Dictionary<Ingredient, IngredientQueue>();
+		}
+
+		public void Begin()
+		{
+			hasBegun = true;
 		}
 
 		public void ResetIngredientBag()
@@ -124,6 +131,8 @@ namespace GameJam
 
 		void Update()
 		{
+			if (!hasBegun) { return; }
+
 			spawnTimer += Time.deltaTime * spawnrate;
 
 			if (spawnTimer > 1)

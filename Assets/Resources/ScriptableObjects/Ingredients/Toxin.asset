@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Abbreviation: 84
   Frequency: 1
-  GravityModifier: 1
+  GravityModifier: 2.5
   Icon: {fileID: 9082349458125976317, guid: a602c4f65e27d3d4aa6d877f44550c2d, type: 3}

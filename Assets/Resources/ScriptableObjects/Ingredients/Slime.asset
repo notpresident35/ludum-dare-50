@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Slime
   m_EditorClassIdentifier: 
   Abbreviation: 83
-  Frequency: 3
-  GravityModifier: 1
+  Frequency: 2
+  GravityModifier: 2.5
   Icon: {fileID: 5818044851972007788, guid: a602c4f65e27d3d4aa6d877f44550c2d, type: 3}

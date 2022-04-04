@@ -30,8 +30,29 @@ namespace GameJam
 		{
 			campaignManager.CampaignFailed.AddListener(GameOver);
 
-			// TODO: Replace with tutorial
-			SpawnTrack();
+			StartCoroutine(Tutorial());
+		}
+
+		IEnumerator Tutorial()
+		{
+			int trackID = campaignManager.AddTrack();
+
+			Bucket newBucket = Instantiate(BucketPrefab, factoryManager.transform.position, Quaternion.identity, factoryManager.transform).GetComponent<Bucket>();
+			newBucket.Configure(trackID);
+
+			BucketUX newBucketUX = Instantiate(BucketUXPrefab, factoryManager.transform.position, Quaternion.identity, factoryManager.transform).GetComponent<BucketUX>();
+			newBucketUX.BindBucket(newBucket);
+			newBucketUX.Spawn();
+			while (!newBucket.isHeld)
+			{
+				yield return null;
+			}
+
+			factoryManager.Begin();
+
+			yield return new WaitForSeconds(5);
+
+			campaignManager.SpawnRandomHero(trackID);
 		}
 
 		void Update()
