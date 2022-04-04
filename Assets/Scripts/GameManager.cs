@@ -10,6 +10,7 @@ namespace GameJam
 		public AnimationCurve IntensityCurve;
 
 		public GameObject BucketPrefab;
+		public GameObject GameOverUI;
 
 		private AudioManager audioManager;
 		private FactoryManager factoryManager;
@@ -58,6 +59,14 @@ namespace GameJam
 		{
 			print("GAME OVER");
 			GameState.state = GameState.State.GameOver;
+			GameOverUI.SetActive(true);
+			StartCoroutine(RestartGame());
+		}
+
+		IEnumerator RestartGame()
+		{
+			yield return new WaitForSeconds(5);
+			UnityEngine.SceneManagement.SceneManager.LoadScene("Main");
 		}
 	}
 }
