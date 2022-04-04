@@ -15,10 +15,10 @@ MonoBehaviour:
   Health: 20
   Damage: 1
   AttackDelay: 1
-  AttackTimer: 0
+  KillMovementDelay: 0
   Size: 0.5
   Speed: 0.5
-  sprite: {fileID: -2135585597343286014, guid: 4b2a04fdbe0ef4d8da8f90eaca817cd1, type: 3}
+  sprite: {fileID: 21300000, guid: 168c9d2985432964a9729043f06cf48c, type: 3}
   AttackMask:
     serializedVersion: 2
     m_Bits: 64
