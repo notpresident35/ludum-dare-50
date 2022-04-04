@@ -35,7 +35,16 @@ namespace GameJam
 
 		public override bool Attack(Health health)
 		{
-			return health.Damage(entity.Damage * Time.deltaTime);
+			bool killed = health.Damage(entity.Damage * Time.deltaTime);
+			if (killed)
+			{
+				AudioManager.Instance.PlaySoundEffect(health.GetComponent<Instanceable>().entity.DeathSFX);
+			}
+			else
+			{
+				AudioManager.Instance.PlaySoundEffect(entity.AttackSFX[Random.Range(0, entity.AttackSFX.Length)]);
+			}
+			return killed;
 		}
 	}
 }
