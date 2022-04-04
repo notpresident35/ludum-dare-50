@@ -9,6 +9,7 @@ namespace GameJam
 	{
 		public const int MaxItems = 4;
 
+		[Header("Public")]
 		/// <summary>
 		/// The associated track number. -1 if invalid.
 		/// </summary>
@@ -25,20 +26,19 @@ namespace GameJam
 		public bool isHeld;
 
 		/// <summary>
-		/// Upward velocity on releasing the bucket.
-		/// </summary>
-		public float throwVel = 8;
-
-		/// <summary>
 		/// Raised when the logical of the bucket changes.
 		/// </summary>
 		public UnityEvent stateChanged;
+
+		[Header("Config")]
+		public float throwVel = 8;
+		public float throwInheritVelFactor = 0.3f;
+		public float throwHorzDecayAccel = 10f;
 
 		[Header("SFX")]
 		public AudioClip PickupSFX;
 		public AudioClip ThrowSFX;
 		public AudioClip GetIngredientSFX;
-
 
 		private Rigidbody2D body;
 
@@ -57,14 +57,16 @@ namespace GameJam
 		public void PickUp()
 		{
 			isHeld = true;
+			body.isKinematic = true;
 			AudioManager.Instance.PlaySoundEffect(PickupSFX);
 			stateChanged.Invoke();
 		}
 
-		public void Throw()
+		public void Throw(Vector2 playerVel)
 		{
-			body.velocity = new Vector2(0, throwVel);
 			isHeld = false;
+			body.isKinematic = false;
+			body.velocity = new Vector2(0, throwVel) + throwInheritVelFactor * playerVel;
 			AudioManager.Instance.PlaySoundEffect(ThrowSFX);
 			stateChanged.Invoke();
 		}
@@ -73,6 +75,15 @@ namespace GameJam
 		{
 			contents.Clear();
 			stateChanged.Invoke();
+		}
+
+		private void FixedUpdate()
+		{
+			if (!isHeld)
+			{
+				var hvel = Mathf.MoveTowards(body.velocity.x, 0, throwHorzDecayAccel * Time.fixedDeltaTime);
+				body.velocity = new Vector2(hvel, body.velocity.y);
+			}
 		}
 
 		private void OnTriggerEnter2D(Collider2D collision)
