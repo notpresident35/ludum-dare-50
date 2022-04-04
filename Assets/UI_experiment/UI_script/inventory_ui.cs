@@ -1,31 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-
-public class inventory_ui//inventory 
+namespace GameJam
 {
-
-	private List<item_ui> itemList;
-
-
-	public inventory_ui()
+	public class inventory_ui//inventory 
 	{
-		itemList = new List<item_ui>();
-		addItem(new item_ui { itemType = item_ui.ItemType.bone, amount = 1 });
-		addItem(new item_ui { itemType = item_ui.ItemType.bone, amount = 1 });
-		addItem(new item_ui { itemType = item_ui.ItemType.bone, amount = 1 });
-		addItem(new item_ui { itemType = item_ui.ItemType.bone, amount = 1 });
-		addItem(new item_ui { itemType = item_ui.ItemType.bone, amount = 1 });
+		[SerializeField] Bucket bucket;
+		List<Sprite> test;
 
-		Debug.Log("current: " + itemList);
-	}
-	public void addItem(item_ui item)
-	{
-		itemList.Add(item);
-	}
-	public List<item_ui> GetitemList()
-	{
-		return itemList;
+		private void Awake()
+		{
+			bucket.stateChanged.AddListener(ExperimentDeleteLater);
+		}
+		public void ExperimentDeleteLater()
+		{
+			for (int i = 0; i < bucket.contents.Count; i++)
+			{
+				test.Add(bucket.contents[i].Icon);
+			}
+		}
+		public List<Sprite> Getitem()
+		{
+			return test;
+		}
 	}
 }
