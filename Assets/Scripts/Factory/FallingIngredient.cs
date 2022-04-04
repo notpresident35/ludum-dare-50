@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class FallingIngredient : MonoBehaviour
 {
+	public UnityEvent<GameObject> DestroyedCallback;
 	public Ingredient ingredient;
 	public GameObject destroyEffects;
 
@@ -20,7 +20,14 @@ public class FallingIngredient : MonoBehaviour
 	/// </summary>
 	public void Collect()
 	{
-		Destroy(gameObject);
+		DestroyedCallback?.Invoke(gameObject);
+		// Skips the object pool for objects manually placed into the scene
+#if UNITY_EDITOR
+		if (gameObject.activeSelf)
+		{
+			Destroy(gameObject);
+		}
+#endif
 	}
 
 	/// <summary>
@@ -29,6 +36,14 @@ public class FallingIngredient : MonoBehaviour
 	public void Delete()
 	{
 		Instantiate(destroyEffects, transform.position, transform.rotation);
-		Destroy(gameObject);
+
+		DestroyedCallback?.Invoke(gameObject);
+		// Skips the object pool for objects manually placed into the scene
+#if UNITY_EDITOR
+		if (gameObject.activeSelf)
+		{
+			Destroy(gameObject);
+		}
+#endif
 	}
 }

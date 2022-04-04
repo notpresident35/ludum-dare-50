@@ -8,6 +8,8 @@ namespace GameJam
 	public class AudioManager : MonoBehaviour
 	{
 
+		public static AudioManager Instance;
+
 		public AudioMixer Mixer;
 		public GameObject SFXPlayerPrefab;
 
@@ -18,6 +20,16 @@ namespace GameJam
 
 		private void Awake()
 		{
+			if (!Instance)
+			{
+				Instance = this;
+			}
+			else
+			{
+				Destroy(gameObject);
+				return;
+			}
+
 			musicTracks = new List<MusicTrack>();
 			foreach (Transform child in transform)
 			{
@@ -43,13 +55,14 @@ namespace GameJam
 		public void PlaySoundEffect(AudioClip clip, float volume = 1, float pitch = 1)
 		{
 			GameObject player;
-			if (SFXPlayerPool.Peek())
+			if (SFXPlayerPool.Count != 0)
 			{
 				player = SFXPlayerPool.Dequeue();
 			}
 			else
 			{
 				player = Instantiate(SFXPlayerPrefab, Vector3.zero, Quaternion.identity, transform);
+				player.GetComponent<SoundEffect>().CompleteCallback.AddListener(PoolSFXPlayer);
 			}
 
 			AudioSource playerSource = player.GetComponent<AudioSource>();
@@ -59,8 +72,6 @@ namespace GameJam
 			playerSource.pitch = pitch;
 
 			playerSource.Play();
-
-			player.GetComponent<SoundEffect>().CompleteCallback += PoolSFXPlayer;
 		}
 
 		public void PoolSFXPlayer(GameObject player)
